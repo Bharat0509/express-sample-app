@@ -1,0 +1,79 @@
+import app from './server.js'
+import dotenv from 'dotenv'
+import cloudinary from 'cloudinary'
+import ErrorHandlerMiddleware from './middlewares/error.js'
+import fileUpload from 'express-fileupload'
+import bodyParser from 'body-parser'
+import cookieParser from 'cookie-parser'
+import cors from 'cors'
+import express from 'express'
+
+// Handling Uncaught Error
+
+process.on('uncaughtException', (err) => {
+  console.log(`Error:${err.message}`)
+  console.log('Shutting Down the Server Due to Uncaught Error ')
+  process.exit(1)
+})
+dotenv.config({path: 'backend/config/config.env'})
+
+// MongoDb Imports
+import MongoServer from './config/database.js'
+
+// Routes Imports
+import product from './routes/productRoute.js'
+import user from './routes/userRoute.js'
+import order from './routes/orderRoute.js'
+
+const corsOptions = {
+  origin: ['http://localhost:3000', 'http://127.0.0.1:3000'],
+  optionsSuccessStatus: 200,
+  methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
+  credentials: true
+}
+app.use(cors(corsOptions))
+app.use(express.json())
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(cookieParser())
+
+app.use(fileUpload())
+
+// Connecting to DB
+MongoServer()
+// cloudinary.config({
+//   cloud_name: process.env.CLOUDINARY_NAME,
+//   api_key: process.env.CLOUDINARY_API_KEY,
+// api_secret: process.env.CLOUDINARY_SECRET_KEY})
+
+// Configuration 
+
+cloudinary.config({
+  cloud_name: 'dbhf7xh4q',
+  api_key: '887173712287675',
+  api_secret: 'T8bjOinQ4NWc7mphFRuVA9PDifY'
+})
+
+// Rotes
+// ********Product Route*********** */
+app.use('/api/v1', product)
+
+// ********User Route*********** */
+app.use('/api/v1', user)
+
+// ********Order Route*********** */
+app.use('/api/v1', order)
+
+// ********Error Handler Route*********** */
+app.use(ErrorHandlerMiddleware)
+
+const server = app.listen(process.env.PORT, () => {
+  console.log(`server started http://localhost:${process.env.PORT}`)
+})
+
+process.on('unhandledRejection', err => {
+  console.log(`Error:${err.message}`)
+  console.log('Shutting down the Server due to Unhandled Promise Rejection')
+  server.close(() => {
+    process.exit(1)
+  })
+})
