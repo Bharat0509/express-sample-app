@@ -26,7 +26,7 @@ import user from './routes/userRoute.js'
 import order from './routes/orderRoute.js'
 
 const corsOptions = {
-  origin: ['http://127.0.0.1:3000', 'http://localhost:3000', 'http://192.168.137.1:3000'],
+  origin: '*',
   methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
   credentials: true
 
