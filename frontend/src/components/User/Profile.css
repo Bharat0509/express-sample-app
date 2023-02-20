@@ -41,7 +41,7 @@
     background-color: tomato;
     font: 400 1vmax "Roboto";
     color: white;
-    margin: 4vmax;
+    margin: 5vmax;
     text-align: center;
     transition: all 500ms;
     padding: .5vmax;
@@ -56,7 +56,7 @@
 .profileContainer>div:last-child {
     justify-content: space-between;
     align-items: flex-start;
-    padding: 5vmax;
+    padding: 3vmax;
     box-sizing: border-box;
 }
 
@@ -104,7 +104,7 @@
 }
 
 
-@media screen and (max-width:600px) {
+@media screen and (max-width:900px) {
     .profileContainer {
         flex-direction: column;
     }

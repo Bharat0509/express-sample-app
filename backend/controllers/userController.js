@@ -21,7 +21,17 @@ export const setCookie=(req,res,next)=>{
   token})
 
 }
+//Test For Cookies are working or not
+export const getCookie=(req,res,next)=>{
+  let {token}=req.cookies;
+  console.log(token,"In get cookies methosd");
 
+  res.status(200).json({
+    success: true,
+    message:'cookied is set',
+  token})
+
+}
 //Register A User
 export const registerUser=catchAsynchErrors(async (req,res,next)=>{
    const {name  ,email,password}=req.body;
@@ -169,10 +179,27 @@ export const updateUserPassword=catchAsynchErrors(async (req,res,next)=>{
 //Update User Profile
 export const updateUserProfile=catchAsynchErrors(async (req,res,next)=>{
     
-    const newUserData={
+    let newUserData={
         name:req.body.name,
         email:req.body.email,
     }
+    if(req.body.avatar!==""){
+        const user=await User.findById(req.user.id);
+        const imageId=user.avatar.public_id;
+        await cloudinary.v2.uploader.destroy(imageId);
+
+        let myCloud=await cloudinary.v2.uploader.upload(req.body.avatar,{
+        folder:"avatars",
+        width:150,
+        crop:"scale"      
+   });
+   newUserData.avatar={
+    public_id:myCloud.public_id,
+    url:myCloud.secure_url
+   }
+
+    }
+   
     const user=await User.findByIdAndUpdate(req.user.id,newUserData,{
         new:true,
         runValidators:true,

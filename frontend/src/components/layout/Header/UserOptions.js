@@ -12,6 +12,7 @@ import {useDispatch} from 'react-redux'
 import {useAlert} from 'react-alert'
 
 const UserOptions = ({user}) => {
+  
   const dispatch=useDispatch();
 
   const alert=useAlert();

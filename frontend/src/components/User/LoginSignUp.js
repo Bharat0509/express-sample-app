@@ -16,7 +16,7 @@ const LoginSignUp = () => {
     const alert=useAlert();
     const navigate=useNavigate();
  
-    const {  loading,error,isAuthenticated} = useSelector(state => state.user);
+    const {  loading,error,isAuthenticated} = useSelector(state => state.authData);
 
     const loginTab = useRef(null);
     const registerTab = useRef(null);

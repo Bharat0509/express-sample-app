@@ -26,16 +26,15 @@ import user from './routes/userRoute.js'
 import order from './routes/orderRoute.js'
 
 const corsOptions = {
-  origin: ['http://localhost:3000', 'http://127.0.0.1:3000'],
-  optionsSuccessStatus: 200,
+  origin: ['http://127.0.0.1:3000', 'http://localhost:3000', 'http://192.168.137.1:3000'],
   methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
   credentials: true
+
 }
 app.use(cors(corsOptions))
 app.use(express.json())
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(cookieParser())
-
 app.use(fileUpload())
 
 // Connecting to DB

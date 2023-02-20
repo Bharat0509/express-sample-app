@@ -1,12 +1,13 @@
 import express from 'express'
-import { setCookie, deleteUser, forgotPassword, getAllUser, getUserDetailAdmin, getUserDetails, loginUser, logoutUser, registerUser, resetPassword, updateUserPassword, updateUserProfile, updateUserRole } from '../controllers/userController.js'
+import { setCookie, deleteUser, forgotPassword, getAllUser, getUserDetailAdmin, getUserDetails, loginUser, logoutUser, registerUser, resetPassword, updateUserPassword, updateUserProfile, updateUserRole, getCookie } from '../controllers/userController.js'
 import { authorizeRoles, isAuthenticatedUser } from '../middlewares/auth.js'
 
 const router = express.Router()
 
 router.route('/register').post(registerUser)
 
-router.route('/test').get(setCookie)
+router.route('/setCookies').get(setCookie)
+router.route('/getCookie').get(getCookie)
 
 router.route('/login').post(loginUser)
 
@@ -16,7 +17,7 @@ router.route('/password/reset/:token').put(resetPassword)
 
 router.route('/logout').get(logoutUser)
 
-router.route('/me').get(isAuthenticatedUser, getUserDetails)
+router.route('/me').post(isAuthenticatedUser, getUserDetails)
 
 router.route('/password/update').put(isAuthenticatedUser, updateUserPassword)
 

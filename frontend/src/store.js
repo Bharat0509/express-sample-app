@@ -1,18 +1,39 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { legacy_createStore as createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
-import { composeWithDevTools } from 'redux-devtools-extension'
-import { productReducer, productDetailsReducer } from './reducers/productReducer'
-import { userReducer } from './reducers/userReducer'
+import { productDetailsReducer, productReducer } from './reducers/productReducer'
+import { profileReducer, tokenReducer, userReducer } from './reducers/userReducer'
 
 const reducer = combineReducers({
+  authToken: tokenReducer,
   products: productReducer,
   productDetails: productDetailsReducer,
-user: userReducer})
+  authData: userReducer,
+profile: profileReducer})
 
-let initialState = {}
+function saveToLacalStorage (store) {
+  try {
+    const serializedStore = JSON.stringify(store)
+    window.localStorage.setItem('store', serializedStore)
+  } catch (err) {
+    console.log(err)
+  }
+}
 
-const middlewares = [thunk]
+function loadFromLocalStorage () {
+  try {
+    const serializedStore = window.localStorage.getItem('store')
+    if (serializedStore === null) return undefined
+    return JSON.parse(serializedStore)
+  } catch (err) {
+    console.log(err)
+    return undefined
+  }
+}
 
-const store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware(...middlewares)))
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const persistedState = loadFromLocalStorage()
 
+const store = createStore(reducer, persistedState, composeEnhancers(applyMiddleware(thunk)))
+
+store.subscribe(() => saveToLacalStorage(store.getState()))
 export default store

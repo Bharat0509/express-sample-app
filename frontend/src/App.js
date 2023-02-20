@@ -8,6 +8,7 @@ import ProductDetails from './components/Product/ProductDetails'
 import Products from './components/Product/Products.js'
 import Search from './components/Product/Search.jsx'
 import Profile from './components/User/Profile.jsx'
+import UpdateProfile from './components/User/UpdateProfile.jsx'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import webfont from 'webfontloader'
 import { useEffect } from 'react'
@@ -16,17 +17,19 @@ import store from './store'
 import { loadUser } from './actions/userActions'
 import { useSelector } from 'react-redux'
 import Test from './Test'
-import ProtectesRoute from './components/Routes/ProtectesRoute'
+import ProtectedRoutes from './components/Routes/ProtectedRoute'
 
 function App () {
-  const {isAuthenticated, user} = useSelector(state => state.user)
+  const {user, isAuthenticated} = useSelector(state => state.authData)
+  const {token} = useSelector(state => state.authToken)
+
   useEffect(() => {
     webfont.load({
       google: {
         families: ['Roboto', 'Droid Sans', 'Chilanka']
       }
     })
-    store.dispatch(loadUser())
+    store.dispatch(loadUser(token))
   }, [])
   return (
     <Router>
@@ -38,7 +41,10 @@ function App () {
         <Route exact path='/products' element={<Products/>} />
         <Route exact path='/search' element={<Search/>} />
         <Route exact path='/login' element={<LoginSignUp/>} />
-        {/* <ProtectesRoute exact path='/account' componenet={Profile} /> */}
+        <Route element={<ProtectedRoutes/>}>
+          <Route exact path='/account' element={<Profile/>} />
+          <Route exact path='/me/update' element={<UpdateProfile/>} />
+        </Route>
         <Route path='/products/:keyword' element={<Products/>} />
         <Route path='/test' element={<Test/>} />
       </Routes>

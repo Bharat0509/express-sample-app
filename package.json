@@ -2,7 +2,7 @@
   "name": "ecom",
   "version": "1.0.0",
   "description": "",
-  "proxy": "http://localhost:4000/",
+  "proxy": "https://bharatecommerce.onrender.com",
   "main": "backend/server.js",
   "type": "module",
   "scripts": {
