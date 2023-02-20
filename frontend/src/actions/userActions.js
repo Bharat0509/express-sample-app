@@ -10,8 +10,8 @@ export const login=(email,password)=>async(dispatch)=>{
         dispatch({type:LOGIN_REQUEST})
         
          
-        // const {data}=await axios.post(`http://127.0.0.1:4000/api/v1/login`,{email,password},{config})
-       const {data}= await axios.post('http://127.0.0.1:4000/api/v1/login',{email,password}, {config})
+        // const {data}=await axios.post(`https://bharatecommerce.onrender.com/api/v1/login`,{email,password},{config})
+       const {data}= await axios.post('https://bharatecommerce.onrender.com/api/v1/login',{email,password}, {config})
 
         dispatch({type:SET_TOKEN_SUCCESS,payload:data.user.token})
         dispatch({type:LOGIN_SUCCESS,payload:data.user})
@@ -35,7 +35,7 @@ export const register=(userData)=>async(dispatch)=>{
     'Content-Type': 'multipart/form-data',
     
   }}
-        const {data}=await axios.post(`http://127.0.0.1:4000/api/v1/register`,userData,{config})
+        const {data}=await axios.post(`https://bharatecommerce.onrender.com/api/v1/register`,userData,{config})
 
         dispatch({type:REGISTER_SUCCESS,payload:data.user})
         
@@ -50,7 +50,7 @@ export const loadUser=(token)=>async(dispatch)=>{
     try {
         dispatch({type:LOAD_USER_REQUEST})
     
-        const {data}=await axios.post(`http://127.0.0.1:4000/api/v1/me`,{token},{config})
+        const {data}=await axios.post(`https://bharatecommerce.onrender.com/api/v1/me`,{token},{config})
 
         dispatch({type:LOAD_USER_SUCCESS,payload:data.user})
 
@@ -66,7 +66,7 @@ export const logout=()=>async(dispatch)=>{
     try {
         
     
-        await axios.get(`http://127.0.0.1:4000/api/v1/logout`,{config})
+        await axios.get(`https://bharatecommerce.onrender.com/api/v1/logout`,{config})
 
         dispatch({type:CLEAR_TOKEN_SUCCESS})
         dispatch({type:LOGOUT_SUCCESS})
@@ -86,7 +86,7 @@ export const updateProfile=(userData)=>async(dispatch)=>{
             headers: {
     'Content-Type': 'multipart/form-data',
   }}
-        const {data}=await axios.put(`http://127.0.0.1:4000/api/v1/me/update`,userData,{config})
+        const {data}=await axios.put(`https://bharatecommerce.onrender.com/api/v1/me/update`,userData,{config})
         dispatch({type:UPDATE_PROFILE_SUCCESS,payload:data})
         
         
