@@ -22,18 +22,20 @@
 
 .profileContainer>div:first-child>h1 {
     color: rgba(0, 0, 0, .55);
-    font: 500 2.2vmax "Roboto";
-    transform: translateX(-10vmax) translateY(-2vmax);
+    font: 500 2.5vmax "Roboto";
+    margin-bottom: 4vmax;
+    transform: translateX(-10vmax);
 }
 
 .profileContainer>div:first-child>img {
     width: 20vmax;
+    aspect-ratio: 1/1;
     border-radius: 50%;
     transition: all 500ms;
 }
 
 .profileContainer>div:first-child>img:hover {
-    transform: scale(1.05);
+    transform: scale(1.09);
 }
 
 .profileContainer>div:first-child>a {
@@ -54,7 +56,8 @@
 }
 
 .profileContainer>div:last-child {
-    justify-content: space-between;
+    justify-content: center;
+    gap: 2vmax;
     align-items: flex-start;
     padding: 3vmax;
     box-sizing: border-box;
@@ -111,7 +114,9 @@
 
     .profileContainer>div:first-child>h1 {
         font: 500 3.2vmax "Roboto";
-        transform: translateY(-2vmax);
+        margin-bottom: 5vmax;
+        text-align: center;
+        transform: translateX(2vmax) translateY(2vmax);
     }
 
     .profileContainer>div:first-child>a {

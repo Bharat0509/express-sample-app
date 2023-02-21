@@ -52,7 +52,6 @@ const UpdateProfile = () => {
     const updateProfileNameChange = (e) => setName(e.target.value)
     const updateProfileEmailChange = (e) => setEmail(e.target.value)
     useEffect(() => {
-        console.log("USer Profile :", user);
 
         if (user) {
             setName(user.name);
@@ -70,7 +69,7 @@ const UpdateProfile = () => {
             dispatch({ type: UPDATE_PROFILE_RESET })
         }
 
-    }, [dispatch, alert, error, isUpdated, user, navigate])
+    }, [dispatch, alert, error, isUpdated, user, token, navigate])
     return (<>
         {
             loading
@@ -114,7 +113,7 @@ const UpdateProfile = () => {
                                         onChange={updateProfileDataChange} />
 
                                 </div>
-                                <input type='submit' value='updateProfile' className='updateProfileBtn' disabled={loading ? true : false} />
+                                <input type='submit' value='Update Profile' className='updateProfileBtn' disabled={loading ? true : false} />
                             </form>
                         </div>
                     </div>

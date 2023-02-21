@@ -1,14 +1,15 @@
 import { legacy_createStore as createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
 import { productDetailsReducer, productReducer } from './reducers/productReducer'
-import { profileReducer, tokenReducer, userReducer } from './reducers/userReducer'
+import { forgotPasswordReducer, profileReducer, tokenReducer, userReducer } from './reducers/userReducer'
 
 const reducer = combineReducers({
   authToken: tokenReducer,
   products: productReducer,
   productDetails: productDetailsReducer,
   authData: userReducer,
-profile: profileReducer})
+  profile: profileReducer,
+forgotPassword: forgotPasswordReducer})
 
 function saveToLacalStorage (store) {
   try {

@@ -9,6 +9,8 @@ import Products from './components/Product/Products.js'
 import Search from './components/Product/Search.jsx'
 import Profile from './components/User/Profile.jsx'
 import UpdateProfile from './components/User/UpdateProfile.jsx'
+import UpdatePassword from './components/User/UpdatePassword.jsx'
+import ForgotPassword from './components/User/ForgotPassword.jsx'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import webfont from 'webfontloader'
 import { useEffect } from 'react'
@@ -44,7 +46,9 @@ function App () {
         <Route element={<ProtectedRoutes/>}>
           <Route exact path='/account' element={<Profile/>} />
           <Route exact path='/me/update' element={<UpdateProfile/>} />
+          <Route exact path='/password/update' element={<UpdatePassword/>} />
         </Route>
+        <Route exact path='/password/forgot' element={<ForgotPassword/>} />
         <Route path='/products/:keyword' element={<Products/>} />
         <Route path='/test' element={<Test/>} />
       </Routes>

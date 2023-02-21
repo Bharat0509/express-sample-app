@@ -23,8 +23,7 @@ export const setCookie=(req,res,next)=>{
 }
 //Test For Cookies are working or not
 export const getCookie=(req,res,next)=>{
-  let {token}=req.cookies;
-  console.log(token,"In get cookies methosd");
+ 
 
   res.status(200).json({
     success: true,
@@ -148,7 +147,6 @@ export const resetPassword=catchAsynchErrors(async(req,res,next)=>{
 
 //Get User Details
 export const getUserDetails=catchAsynchErrors(async (req,res,next)=>{
-    console.log(req.user);
     const user=await User.findById(req.user.id);
 
     res.status(200).json({

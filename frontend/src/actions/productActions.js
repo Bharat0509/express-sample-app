@@ -6,11 +6,11 @@ export const getProducts=(keyword="",currentPage=1,price=[0,100000],category="",
         dispatch({
             type:ALL_PRODUCT_REQUEST
         });
-        let link=`https://bharatecommerce.onrender.com/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}`
+        let link=`http://127.0.0.1:4000/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}`
         
         
         if(category.length>0){
-            link=`https://bharatecommerce.onrender.com/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`
+            link=`http://127.0.0.1:4000/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`
         }
 
         const {data}=await axios.get(link);
@@ -36,8 +36,8 @@ export const getProductsDetails=(id)=>async (dispatch)=>{
         dispatch({
             type:PRODUCT_DETAILS_REQUEST
         });
-        const {data}=await axios.get(`https://bharatecommerce.onrender.com/api/v1/product/${id}`);
-        console.log(data);
+        const {data}=await axios.get(`http://127.0.0.1:4000/api/v1/product/${id}`);
+       
         
 
         dispatch({

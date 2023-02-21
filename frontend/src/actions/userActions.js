@@ -1,4 +1,4 @@
-import { CLEAR_ERRORS, CLEAR_TOKEN_SUCCESS, LOAD_USER_FAIL, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_FAIL, LOGOUT_SUCCESS, REGISTER_FAIL, REGISTER_REQUEST, REGISTER_SUCCESS, SET_TOKEN_SUCCESS, UPDATE_PROFILE_FAIL, UPDATE_PROFILE_REQUEST, UPDATE_PROFILE_SUCCESS } from '../constants/userContants'
+import { CLEAR_ERRORS, CLEAR_TOKEN_SUCCESS, FORGOT_PASSWORD_FAIL, FORGOT_PASSWORD_SUCCESS, LOAD_USER_FAIL, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_FAIL, LOGOUT_SUCCESS, REGISTER_FAIL, REGISTER_REQUEST, REGISTER_SUCCESS, SET_TOKEN_SUCCESS, UPDATE_PASSWORD_FAIL, UPDATE_PASSWORD_REQUEST, UPDATE_PASSWORD_SUCCESS, UPDATE_PROFILE_FAIL, UPDATE_PROFILE_REQUEST, UPDATE_PROFILE_SUCCESS } from '../constants/userContants'
 import axios from 'axios'
 const config = { withCredentials: true ,headers: {
     'Content-Type': 'application/json',
@@ -10,8 +10,8 @@ export const login=(email,password)=>async(dispatch)=>{
         dispatch({type:LOGIN_REQUEST})
         
          
-        // const {data}=await axios.post(`https://bharatecommerce.onrender.com/api/v1/login`,{email,password},{config})
-       const {data}= await axios.post('https://bharatecommerce.onrender.com/api/v1/login',{email,password}, {config})
+        // const {data}=await axios.post(`http://127.0.0.1:4000/api/v1/login`,{email,password},{config})
+       const {data}= await axios.post('http://127.0.0.1:4000/api/v1/login',{email,password}, {config})
 
         dispatch({type:SET_TOKEN_SUCCESS,payload:data.user.token})
         dispatch({type:LOGIN_SUCCESS,payload:data.user})
@@ -35,12 +35,12 @@ export const register=(userData)=>async(dispatch)=>{
     'Content-Type': 'multipart/form-data',
     
   }}
-        const {data}=await axios.post(`https://bharatecommerce.onrender.com/api/v1/register`,userData,{config})
+        const {data}=await axios.post(`http://127.0.0.1:4000/api/v1/register`,userData,{config})
 
         dispatch({type:REGISTER_SUCCESS,payload:data.user})
         
     } catch (error) {
-        console.log(error);
+        
         dispatch({type:REGISTER_FAIL,payload:error.response.data.message})   
     }
 }
@@ -50,7 +50,7 @@ export const loadUser=(token)=>async(dispatch)=>{
     try {
         dispatch({type:LOAD_USER_REQUEST})
     
-        const {data}=await axios.post(`https://bharatecommerce.onrender.com/api/v1/me`,{token},{config})
+        const {data}=await axios.post(`http://127.0.0.1:4000/api/v1/me`,{token},{config})
 
         dispatch({type:LOAD_USER_SUCCESS,payload:data.user})
 
@@ -66,7 +66,7 @@ export const logout=()=>async(dispatch)=>{
     try {
         
     
-        await axios.get(`https://bharatecommerce.onrender.com/api/v1/logout`,{config})
+        await axios.get(`http://127.0.0.1:4000/api/v1/logout`,{config})
 
         dispatch({type:CLEAR_TOKEN_SUCCESS})
         dispatch({type:LOGOUT_SUCCESS})
@@ -86,16 +86,54 @@ export const updateProfile=(userData)=>async(dispatch)=>{
             headers: {
     'Content-Type': 'multipart/form-data',
   }}
-        const {data}=await axios.put(`https://bharatecommerce.onrender.com/api/v1/me/update`,userData,{config})
+        const {data}=await axios.put(`http://127.0.0.1:4000/api/v1/me/update`,userData,{config})
         dispatch({type:UPDATE_PROFILE_SUCCESS,payload:data})
         
         
     } catch (error) {
-        console.log(error);
+       
         dispatch({type:UPDATE_PROFILE_FAIL,payload:error.response.data.message})   
     }
 }
 
+
+//Update A User Profile Password Action
+export const updatePassword=(password)=>async(dispatch)=>{
+    try {
+        dispatch({type:UPDATE_PASSWORD_REQUEST})
+       
+
+        const config = { withCredentials: true ,
+            headers: {
+    'Content-Type': 'application/json',
+  }}
+        const {data}=await axios.put(`http://127.0.0.1:4000/api/v1/password/update`,password,{config})
+        dispatch({type:UPDATE_PASSWORD_SUCCESS,payload:data})
+        
+        
+    } catch (error) {
+       
+        dispatch({type:UPDATE_PASSWORD_FAIL,payload:error.response.data.message})   
+    }
+}
+
+
+//Forgot Password Action
+export const forgotPassword=(email)=>async(dispatch)=>{
+    try {
+        dispatch({type:FORGOT_PASSWORD_SUCCESS})
+    
+       const {data}= await axios.post('http://127.0.0.1:4000/api/v1/forgot/password',{email}, {config})
+
+        // dispatch({type:SET_TOKEN_SUCCESS,payload:data.user.token})
+        dispatch({type:FORGOT_PASSWORD_SUCCESS,payload:data.message})
+        
+        
+    } catch (error) {
+        // dispatch({type:LOGIN_FAIL,payload:error.response}) 
+        dispatch({type:FORGOT_PASSWORD_FAIL})  
+    }
+}
 
 //clear Error 
 export const clearErrors=()=>async (dispatch)=>{

@@ -2,14 +2,13 @@
 const sendToken = (user, statusCode, res) => {
 
   const token = user.getJWTToken()
- console.log('TOKEN ',token);
   // options for cookie
   const options = {
     expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
     httpOnly: true
   }
   user = {...user._doc, token}
-  res.status(statusCode).cookie('token', "pagle ajdal ", options).json({
+  res.status(statusCode).cookie('token', token, options).json({
     success: true,
    user})
 }
