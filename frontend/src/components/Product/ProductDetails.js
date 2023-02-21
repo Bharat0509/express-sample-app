@@ -9,6 +9,8 @@ import ReviewCard from './ReviewCard.js'
 import Loader from '../layout/Loader/Loader'
 import {useAlert} from 'react-alert'
 import MetaData from '../layout/MetaData'
+import { addItemToCart } from '../../actions/cartAction'
+
 
 const ProductDetails = () => {
   const alert=useAlert();
@@ -19,6 +21,11 @@ const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1)
   const decrementQuantity=()=>setQuantity(quantity-1<1 ? 1 : quantity-1)
   const incrementQuantity=()=>setQuantity(quantity+1)
+
+  const addToCardHandler=()=>{
+    dispatch(addItemToCart(params.id,quantity))
+    alert.success("Item added to Cart ")
+  }
   useEffect(() => {
   if(error){
      alert.error(error);
@@ -75,7 +82,7 @@ const ProductDetails = () => {
 
                   <button onClick={incrementQuantity}>+</button>
                 </div>
-                <button>Add To Cart</button>
+                <button onClick={addToCardHandler}>Add To Cart</button>
               </div>
               <p>
                 Status:
