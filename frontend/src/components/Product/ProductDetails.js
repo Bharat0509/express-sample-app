@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Carousel from 'react-material-ui-carousel'
 import "./ProductDetails.css"
 import { useSelector, useDispatch } from 'react-redux'
@@ -16,7 +16,9 @@ const ProductDetails = () => {
   const params = useParams();
   const { product, loading,error } = useSelector(state => state.productDetails)
 
- 
+  const [quantity, setQuantity] = useState(1)
+  const decrementQuantity=()=>setQuantity(quantity-1<1 ? 1 : quantity-1)
+  const incrementQuantity=()=>setQuantity(quantity+1)
   useEffect(() => {
   if(error){
      alert.error(error);
@@ -68,9 +70,10 @@ const ProductDetails = () => {
               <h1>{`₹${product.price}`}</h1>
               <div className="detailsBlock-3-1">
                 <div className="detailsBlock-3-1-1">
-                  <button>-</button>
-                  <input type="number" value={1} />
-                  <button>+</button>
+                  <button onClick={decrementQuantity}>-</button>
+<input type='number' value={quantity} />
+
+                  <button onClick={incrementQuantity}>+</button>
                 </div>
                 <button>Add To Cart</button>
               </div>

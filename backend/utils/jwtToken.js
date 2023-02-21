@@ -9,9 +9,9 @@ const sendToken = (user, statusCode, res) => {
     httpOnly: true
   }
   user = {...user._doc, token}
-  res.status(statusCode).cookie('token', token, options).json({
+  return res.status(statusCode).cookie('token', token, options).json({
     success: true,
-   user})
+   message:"Password Reset Successfully!!"})
 }
 
 export default sendToken

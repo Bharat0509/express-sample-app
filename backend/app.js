@@ -15,7 +15,7 @@ process.on('uncaughtException', (err) => {
   console.log('Shutting Down the Server Due to Uncaught Error ')
   process.exit(1)
 })
-dotenv.config({path: 'backend/config/config.env'})
+dotenv.config({path: './config/config.env'})
 
 // MongoDb Imports
 import MongoServer from './config/database.js'

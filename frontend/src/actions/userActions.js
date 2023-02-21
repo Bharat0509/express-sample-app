@@ -1,4 +1,4 @@
-import { CLEAR_ERRORS, CLEAR_TOKEN_SUCCESS, FORGOT_PASSWORD_FAIL, FORGOT_PASSWORD_SUCCESS, LOAD_USER_FAIL, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_FAIL, LOGOUT_SUCCESS, REGISTER_FAIL, REGISTER_REQUEST, REGISTER_SUCCESS, SET_TOKEN_SUCCESS, UPDATE_PASSWORD_FAIL, UPDATE_PASSWORD_REQUEST, UPDATE_PASSWORD_SUCCESS, UPDATE_PROFILE_FAIL, UPDATE_PROFILE_REQUEST, UPDATE_PROFILE_SUCCESS } from '../constants/userContants'
+import { CLEAR_ERRORS, CLEAR_TOKEN_SUCCESS, FORGOT_PASSWORD_FAIL, FORGOT_PASSWORD_SUCCESS, LOAD_USER_FAIL, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_FAIL, LOGOUT_SUCCESS, REGISTER_FAIL, REGISTER_REQUEST, REGISTER_SUCCESS, RESET_PASSWORD_FAIL, RESET_PASSWORD_REQUEST, RESET_PASSWORD_SUCCESS, SET_TOKEN_SUCCESS, UPDATE_PASSWORD_FAIL, UPDATE_PASSWORD_REQUEST, UPDATE_PASSWORD_SUCCESS, UPDATE_PROFILE_FAIL, UPDATE_PROFILE_REQUEST, UPDATE_PROFILE_SUCCESS } from '../constants/userContants'
 import axios from 'axios'
 const config = { withCredentials: true ,headers: {
     'Content-Type': 'application/json',
@@ -123,7 +123,7 @@ export const forgotPassword=(email)=>async(dispatch)=>{
     try {
         dispatch({type:FORGOT_PASSWORD_SUCCESS})
     
-       const {data}= await axios.post('http://127.0.0.1:4000/api/v1/forgot/password',{email}, {config})
+       const {data}= await axios.post('http://127.0.0.1:4000/api/v1/password/forgot',email, {config})
 
         // dispatch({type:SET_TOKEN_SUCCESS,payload:data.user.token})
         dispatch({type:FORGOT_PASSWORD_SUCCESS,payload:data.message})
@@ -141,4 +141,25 @@ export const clearErrors=()=>async (dispatch)=>{
         dispatch({
             type:CLEAR_ERRORS,
         }) 
+}
+
+
+//Update A User Profile Password Action
+export const resetPassword=(token,passwords)=>async(dispatch)=>{
+    try {
+        dispatch({type:RESET_PASSWORD_REQUEST})
+       
+
+        const config = { withCredentials: true ,
+            headers: {
+    'Content-Type': 'application/json',
+  }}
+        const {data}=await axios.put(`http://127.0.0.1:4000/api/v1/password/reset/${token}`,passwords,{config})
+        dispatch({type:RESET_PASSWORD_SUCCESS,payload:data.message})
+        
+        
+    } catch (error) {
+       
+        dispatch({type:RESET_PASSWORD_FAIL,payload:error.response.data.message})   
+    }
 }

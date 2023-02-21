@@ -89,7 +89,9 @@ export const forgotPassword=catchAsynchErrors(async(req,res,next)=>{
     const resetToken=user.getResetPasswordToken();
     await user.save({validateBeforeSave:false});
 
-    const resetPasswordUrl=`${req.protocol}://${req.get("host")}/api/v1/password/reset/${resetToken}`;
+    // const resetPasswordUrl=`${req.protocol}://${req.get("host")}/api/v1/password/reset/${resetToken}`;
+
+    let resetPasswordUrl=`${process.env.FRONTEND_URL}/api/v1/password/reset/${resetToken}`
 
     const message=`Your Password reset token is :-\n\n${resetPasswordUrl}
     \n\nIf you have not requested this email then, please ignore it`;
@@ -138,7 +140,7 @@ export const resetPassword=catchAsynchErrors(async(req,res,next)=>{
         await user.save();
         sendToken(user,200,res);
     }
-     return next(new ErrorHandler("Confirm Password is not Correct",404));
+    else return next(new ErrorHandler("Confirm Password is not Correct",404));
 
     
 

@@ -11,6 +11,7 @@ import Profile from './components/User/Profile.jsx'
 import UpdateProfile from './components/User/UpdateProfile.jsx'
 import UpdatePassword from './components/User/UpdatePassword.jsx'
 import ForgotPassword from './components/User/ForgotPassword.jsx'
+import ResetPassword from './components/User/ResetPassword.jsx'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import webfont from 'webfontloader'
 import { useEffect } from 'react'
@@ -32,7 +33,7 @@ function App () {
       }
     })
     store.dispatch(loadUser(token))
-  }, [])
+  }, [token])
   return (
     <Router>
       <Header/>
@@ -49,6 +50,7 @@ function App () {
           <Route exact path='/password/update' element={<UpdatePassword/>} />
         </Route>
         <Route exact path='/password/forgot' element={<ForgotPassword/>} />
+        <Route exact path='/password/reset/:token' element={<ResetPassword/>} />
         <Route path='/products/:keyword' element={<Products/>} />
         <Route path='/test' element={<Test/>} />
       </Routes>
