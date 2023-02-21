@@ -2,8 +2,7 @@ import mongoose from 'mongoose'
 
 const connectToDb = () => {
   mongoose.set('strictQuery', true)
-
-  mongoose.connect(`${process.env.MONGO_URI}`, { useNewUrlParser: true, useUnifiedTopology: true}).then(
+  mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true}).then(
     console.log('MongoDb Servers Connected!!')
   ).catch(
     (err) => {

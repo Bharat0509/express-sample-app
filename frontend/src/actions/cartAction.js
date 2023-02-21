@@ -2,7 +2,7 @@ import axios from 'axios'
 import { ADD_TO_CARD } from '../constants/cartContants';
 
 //Add to Card ser Action
-export const addToCart=(email,password)=>async(dispatch)=>{
+export const addItemToCart=(email,password)=>async(dispatch)=>{
     try {
         
         

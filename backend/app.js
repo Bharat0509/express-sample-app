@@ -15,7 +15,7 @@ process.on('uncaughtException', (err) => {
   console.log('Shutting Down the Server Due to Uncaught Error ')
   process.exit(1)
 })
-dotenv.config({path: './config/config.env'})
+dotenv.config({path: './backend/config/config.env'})
 
 // MongoDb Imports
 import MongoServer from './config/database.js'
@@ -38,7 +38,7 @@ app.use(cookieParser())
 app.use(fileUpload())
 
 // Connecting to DB
-const connectMongo = () => MongoServer()
+MongoServer()
 
 // cloudinary.config({
 //   cloud_name: process.env.CLOUDINARY_NAME,
@@ -68,7 +68,6 @@ app.use(ErrorHandlerMiddleware)
 
 const server = app.listen(process.env.PORT, () => {
   console.log(`server started http://localhost:${process.env.PORT}`)
-  connectMongo()
 })
 
 process.on('unhandledRejection', err => {
