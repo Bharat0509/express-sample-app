@@ -10,10 +10,12 @@ import { Country, State } from 'country-state-city'
 import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
 import MetaData from '../layout/MetaData';
+import { useNavigate } from 'react-router-dom'
 import CheckoutSteps from '../Cart/CheckoutSteps.jsx'
-
+import { saveShippingInfo } from '../../actions/cartAction'
 const Shipping = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const alert = useAlert();
     const { shippingInfo } = useSelector(state => state.cart)
     const [address, setAddress] = useState(shippingInfo?.address)
@@ -25,12 +27,20 @@ const Shipping = () => {
 
 
 
-    const shippingSubmit = () => {
+    const shippingSubmit = (e) => {
+        e.preventDefault();
+        if (phoneNo.length < 10 || phoneNo.length > 10) {
+            alert.error("Phone Number is Not Valid ");
+            return;
+        }
+        dispatch(saveShippingInfo({ address, city, state, country, pinCode, phoneNo }))
+        navigate('/order/confirm')
 
     }
     return (
         <>
             <MetaData title={`Shipping Info`} />
+
             <CheckoutSteps activeStep={0} />
             <div className='shippingContainer'>
                 <div className='shippingBox'>
