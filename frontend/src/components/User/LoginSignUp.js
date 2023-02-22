@@ -3,7 +3,7 @@ import { useRef } from 'react'
 import "./LoginSignUp.css"
 import Loader from '../layout/Loader/Loader'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import FaceIcon from '@mui/icons-material/Face';
@@ -14,6 +14,7 @@ import {useAlert} from 'react-alert'
 const LoginSignUp = () => {
     const dispatch = useDispatch();
     const alert=useAlert();
+    const location=useLocation();
     const navigate=useNavigate();
  
     const {  loading,error,isAuthenticated} = useSelector(state => state.authData);
@@ -48,20 +49,20 @@ const LoginSignUp = () => {
         console.log(myForm.avatar);
         dispatch(register(myForm))
     }
-
+    const redirectLink=location.search ? location.search.split("=")[1] :'account'
     useEffect(()=>{
         if(error){
             alert.error(error)
             dispatch(clearErrors())
         }
         if(isAuthenticated){
-            navigate("/account");
+            navigate(`/${redirectLink}`);
         }
         else {
             navigate("/login")
         }
 
-    },[dispatch,alert,error,isAuthenticated,navigate])
+    },[dispatch,alert,error,isAuthenticated,navigate,location,redirectLink])
     const switchTab = (e, tab) => {
         if (tab === "Login") {
             switcherTab.current.classList.add("shiftToNeutral")

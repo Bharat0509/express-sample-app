@@ -38,7 +38,7 @@ export const getProductsDetails=(id)=>async (dispatch)=>{
         });
         const {data}=await axios.get(`http://127.0.0.1:4000/api/v1/product/${id}`);
        
-        
+        console.log(data);
 
         dispatch({
             type:PRODUCT_DETAILS_SUCCESS,

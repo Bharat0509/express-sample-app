@@ -11,7 +11,7 @@ const sendToken = (user, statusCode, res) => {
   user = {...user._doc, token}
   return res.status(statusCode).cookie('token', token, options).json({
     success: true,
-   message:"Password Reset Successfully!!"})
+   user})
 }
 
 export default sendToken

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ADD_TO_CARD } from '../constants/cartContants';
+import { ADD_TO_CARD, REMOVE_CART_ITEM, SAVE_SHIPPING_INFO } from '../constants/cartContants';
 
 //Add to Card ser Action
 export const addItemToCart=(id,quantity)=>async(dispatch)=>{
@@ -16,5 +16,26 @@ export const addItemToCart=(id,quantity)=>async(dispatch)=>{
         },
     },
     )
+
+}
+
+
+
+//Remove From the Cart
+export const removeItemFromCart=(id)=>async(dispatch)=>{
+ 
+       
+    dispatch({type:REMOVE_CART_ITEM,payload:id},)
+
+}
+
+
+
+
+//Remove From the Cart
+export const saveShippingInfo=(data)=>async(dispatch)=>{
+ 
+       
+    dispatch({type:SAVE_SHIPPING_INFO,payload:data},)
 
 }

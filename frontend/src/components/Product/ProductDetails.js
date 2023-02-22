@@ -41,7 +41,7 @@ const ProductDetails = () => {
     color: 'rgba(20,20,20,.1)',
     activeColor: 'tomato',
     size: window.innerWidth < 1000 ? 20 : 25,
-    value: Number(product.ratings),
+    value: Number(product?.ratings),
     isHalf: true
 
   }

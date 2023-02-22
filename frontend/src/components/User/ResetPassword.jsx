@@ -48,7 +48,7 @@ const ResetPassword = () => {
 
         }
 
-    }, [dispatch, alert, error, navigate, token])
+    }, [dispatch, alert, error, navigate, token, message])
     return (
 
 

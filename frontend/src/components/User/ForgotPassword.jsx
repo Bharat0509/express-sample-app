@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import './ForgotPassword.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 import MailOutlineIcon from '@mui/icons-material/MailOutline'
-
-import { clearErrors, forgotPassword, loadUser } from '../../actions/userActions'
+import { clearErrors, forgotPassword } from '../../actions/userActions'
 import { useAlert } from 'react-alert'
 import MetaData from '../layout/MetaData'
 import Loader from '../layout/Loader/Loader'
