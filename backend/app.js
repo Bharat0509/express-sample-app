@@ -38,7 +38,7 @@ app.use(cookieParser())
 app.use(fileUpload())
 
 // Connecting to DB
-MongoServer()
+
 
 // cloudinary.config({
 //   cloud_name: process.env.CLOUDINARY_NAME,
@@ -66,7 +66,8 @@ app.use('/api/v1', order)
 // ********Error Handler Route*********** */
 app.use(ErrorHandlerMiddleware)
 
-const server = app.listen(process.env.PORT, () => {
+const server = app.listen(process.env.PORT, async () => {
+  await MongoServer();
   console.log(`server started http://localhost:${process.env.PORT}`)
 })
 
