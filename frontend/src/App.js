@@ -14,21 +14,34 @@ import ForgotPassword from './components/User/ForgotPassword.jsx'
 import ResetPassword from './components/User/ResetPassword.jsx'
 import Shipping from './components/Cart/Shipping.jsx'
 import Cart from './components/Cart/Cart.jsx'
+import ConfirmOrder from './components/Cart/ConfirmOrder.jsx'
+import ProcessPayment from './components/Cart/ProcessPayment.jsx'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import webfont from 'webfontloader'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import LoginSignUp from './components/User/LoginSignUp'
 import store from './store'
 import { loadUser } from './actions/userActions'
 import { useSelector } from 'react-redux'
 import Test from './Test'
 import ProtectedRoutes from './components/Routes/ProtectedRoute'
+import axios from 'axios'
+import {Elements} from '@stripe/react-stripe-js'
+import { loadStripe } from '@stripe/stripe-js'
 
 function App () {
   const {user, isAuthenticated} = useSelector(state => state.authData)
   const {token} = useSelector(state => state.authToken)
+  const [stripeApiKey, setStripeApiKey] = useState('')
 
+  async function getStripeApiKey(){
+    const {data}=await axios.post("http://localhost:4000/api/v1/stripeapikey",{token})
+    setStripeApiKey(data.stripeApiKey)
+   
+
+  }
   useEffect(() => {
+    getStripeApiKey()
     webfont.load({
       google: {
         families: ['Roboto', 'Droid Sans', 'Chilanka']
@@ -46,11 +59,15 @@ function App () {
         <Route exact path='/products' element={<Products/>} />
         <Route exact path='/search' element={<Search/>} />
         <Route exact path='/login' element={<LoginSignUp/>} />
-        <Route element={<ProtectedRoutes/>}>
+        <Route element={<ProtectedRoutes stripeKey={stripeApiKey}/>}>
           <Route exact path='/account' element={<Profile/>} />
           <Route exact path='/me/update' element={<UpdateProfile/>} />
           <Route exact path='/password/update' element={<UpdatePassword/>} />
           <Route exact path='/shipping' element={<Shipping/>} />
+          <Route exact path='/order/confirm' element={<ConfirmOrder/>} />
+          
+          <Route exact path='/process/payment' element={<ProcessPayment/>} />
+       
         </Route>
         <Route exact path='/password/forgot' element={<ForgotPassword/>} />
         <Route exact path='/password/reset/:token' element={<ResetPassword/>} />

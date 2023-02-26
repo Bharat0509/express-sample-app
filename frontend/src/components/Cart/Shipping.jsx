@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Shipping.css'
 import PinDropIcon from '@mui/icons-material/PinDrop';
 import HomeIcon from '@mui/icons-material/Home';
@@ -18,25 +18,40 @@ const Shipping = () => {
     const navigate = useNavigate();
     const alert = useAlert();
     const { shippingInfo } = useSelector(state => state.cart)
-    const [address, setAddress] = useState(shippingInfo?.address)
-    const [city, setCity] = useState(shippingInfo?.city)
-    const [state, setState] = useState(shippingInfo?.state)
-    const [country, setCountry] = useState(shippingInfo?.country)
-    const [pinCode, setPinCode] = useState(shippingInfo?.pinCode)
-    const [phoneNo, setPhoneNo] = useState(shippingInfo?.phoneNo)
+    const [address, setAddress] = useState("")
+    const [city, setCity] = useState("")
+    const [state, setState] = useState("")
+    const [country, setCountry] = useState("")
+    const [pinCode, setPinCode] = useState("")
+    const [phoneNo, setPhoneNo] = useState("")
 
 
 
     const shippingSubmit = (e) => {
         e.preventDefault();
-        if (phoneNo.length < 10 || phoneNo.length > 10) {
+
+
+        if (phoneNo.length != 10) {
             alert.error("Phone Number is Not Valid ");
             return;
         }
-        dispatch(saveShippingInfo({ address, city, state, country, pinCode, phoneNo }))
+        const data = { address, city, state, country, pinCode, phoneNo }
+        console.log(data);
+        dispatch(saveShippingInfo(data))
         navigate('/order/confirm')
 
     }
+    useEffect(() => {
+        if (shippingInfo) {
+
+            setAddress(shippingInfo?.address)
+            setCity(shippingInfo?.city)
+            setState(shippingInfo?.state)
+            setCountry(shippingInfo?.country)
+            setPinCode(shippingInfo?.pinCode)
+            setPhoneNo(shippingInfo?.phoneNo)
+        }
+    }, [alert])
     return (
         <>
             <MetaData title={`Shipping Info`} />
@@ -46,7 +61,7 @@ const Shipping = () => {
                 <div className='shippingBox'>
                     <h2><span className='profile-name'>Shipping Deta</span>ils</h2>
 
-                    <form className='shippingForm' encType="multipart/form-data" onSubmit={shippingSubmit}>
+                    <form className='shippingForm' onSubmit={shippingSubmit} encType="multipart/form-data" >
                         <div className='shippingFormDiv'>
                             <HomeIcon />
                             <input
@@ -133,7 +148,7 @@ const Shipping = () => {
 
 
 
-                        <input type='submit' value='Continue' className='shippingBtn' disabled={state ? true : false} />
+                        <input type="submit" value="Continue" className='shippingBtn' />
                     </form>
                 </div>
             </div >

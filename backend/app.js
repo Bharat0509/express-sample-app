@@ -8,6 +8,7 @@ import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import express from 'express'
 
+dotenv.config({path: './backend/config/config.env'})
 // Handling Uncaught Error
 
 process.on('uncaughtException', (err) => {
@@ -15,7 +16,7 @@ process.on('uncaughtException', (err) => {
   console.log('Shutting Down the Server Due to Uncaught Error ')
   process.exit(1)
 })
-dotenv.config({path: './backend/config/config.env'})
+
 
 // MongoDb Imports
 import MongoServer from './config/database.js'
@@ -24,6 +25,7 @@ import MongoServer from './config/database.js'
 import product from './routes/productRoute.js'
 import user from './routes/userRoute.js'
 import order from './routes/orderRoute.js'
+import payment from './routes/paymentRoute.js'
 
 const corsOptions = {
   origin: '*',
@@ -62,6 +64,10 @@ app.use('/api/v1', user)
 
 // ********Order Route*********** */
 app.use('/api/v1', order)
+
+
+// ********Payment Route*********** */
+app.use('/api/v1', payment)
 
 // ********Error Handler Route*********** */
 app.use(ErrorHandlerMiddleware)

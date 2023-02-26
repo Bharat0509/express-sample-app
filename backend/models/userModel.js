@@ -56,8 +56,8 @@ userSchema.pre("save",async function(next){
 })
 //Adding JWT TOKEN to web
 userSchema.methods.getJWTToken=function(){
-  return jwt.sign({id:this._id},`${process.env.JWT_KEY}`,{
-    expiresIn:`${process.env.JWT_EXPIRES}`
+  return jwt.sign({id:this._id},`adjajfajfaoHKKfleJFSKFLS`,{
+    expiresIn:'5d'
 
   });
 }
