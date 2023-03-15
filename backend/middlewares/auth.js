@@ -6,9 +6,9 @@ import Cookies from 'js-cookie'
 
 
 export const isAuthenticatedUser=catchAsyncError(async (req,res,next)=>{
-    const data=Cookies.get('token')
-    console.log("cookies in browser ",data);
-    const {token}=req.cookies;
+
+    console.log("cookies in browser ",req.cookies);
+    const token=req.cookies?.token || req.body;
     console.log(req.cookies);
 
     
