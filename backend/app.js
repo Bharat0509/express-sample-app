@@ -30,7 +30,7 @@ import payment from './routes/paymentRoute.js'
 
 //Cors Options 
 const corsOptions = {
-    origin:h["https://bharatecommerce.onrender.com/", "https://bharatecommerce.onrender.com"],
+    origin:["https://bharatecommerce.onrender.com/", "https://bharatecommerce.onrender.com"],
     optionsSuccessStatus: 200,
     credentials: true,
  };
