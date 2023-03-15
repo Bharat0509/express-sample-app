@@ -1,5 +1,5 @@
 
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useAlert } from 'react-alert'
 import { useNavigate } from 'react-router-dom'
@@ -12,6 +12,7 @@ import MetaData from '../layout/MetaData';
 import CheckoutSteps from './CheckoutSteps';
 import { Typography } from '@mui/material';
 import { CardNumberElement, CardCvcElement, CardExpiryElement, useStripe, useElements } from '@stripe/react-stripe-js'
+import { clearErrors, createOrder } from '../../actions/newOrderAction'
 
 const ProcessPayment = () => {
     const orderInfo = JSON.parse(sessionStorage.getItem('orderInfo'))
@@ -22,13 +23,28 @@ const ProcessPayment = () => {
     const alert = useAlert();
     const navigate = useNavigate();
 
-    const { shippingInfo } = useSelector(state => state.cart)
+    const { shippingInfo, cartItems } = useSelector(state => state.cart)
     const { user } = useSelector(state => state.authData)
+    const { error } = useSelector(state => state.newOrder)
     const { token } = useSelector(state => state.authToken)
     const paymentData = {
         amount: Math.round(orderInfo.totalPrice * 100)
     }
 
+
+    //Order Data Creation 
+    const order = {
+        shippingInfo,
+        orderItems: cartItems,
+        itemsPrice: orderInfo.subtotal,
+        taxPrice: orderInfo.tax,
+        shippingPrice: orderInfo.shippingPrice,
+        totalPrice: orderInfo.totalPrice,
+        token
+    }
+
+
+    //Payment Handler
     const paymentHandler = async (e) => {
         e.preventDefault();
         payBtn.current.disabled = true;
@@ -70,6 +86,11 @@ const ProcessPayment = () => {
             }
             else {
                 if (result.paymentIntent.status === "succeeded") {
+                    order.paymentInfo = {
+                        id: result.paymentIntent.id,
+                        status: result.paymentIntent.status
+                    }
+                    dispatch(createOrder(order))
                     navigate('/success')
                 }
                 else {
@@ -82,6 +103,14 @@ const ProcessPayment = () => {
 
         }
     }
+
+
+    useEffect(() => {
+        if (error) {
+            alert.error(error);
+            dispatch(clearErrors())
+        }
+    }, [dispatch, alert, error])
     return (
         <>
             <MetaData title={"Process Payment"} />

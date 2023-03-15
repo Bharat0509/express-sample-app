@@ -27,12 +27,18 @@ import user from './routes/userRoute.js'
 import order from './routes/orderRoute.js'
 import payment from './routes/paymentRoute.js'
 
-const corsOptions = {
-  origin: '*',
-  methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
-  credentials: true
 
-}
+//Cors Options 
+const allowedOrigins = ["http://localhost:3000","http://127.0.0.1:3000","http://127.0.0.1:000"];
+const corsOptions = {
+    origin: allowedOrigins,
+optionsSuccessStatus: 200,
+ credentials: true,
+ };
+
+
+
+
 app.use(cors(corsOptions))
 app.use(express.json())
 app.use(bodyParser.urlencoded({extended: true}))

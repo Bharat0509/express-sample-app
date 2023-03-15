@@ -16,6 +16,8 @@ import Shipping from './components/Cart/Shipping.jsx'
 import Cart from './components/Cart/Cart.jsx'
 import ConfirmOrder from './components/Cart/ConfirmOrder.jsx'
 import ProcessPayment from './components/Cart/ProcessPayment.jsx'
+import PaymentSuccess from './components/Cart/PaymentSuccess.jsx'
+import MyOrders from './components/Order/MyOrders.jsx'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import webfont from 'webfontloader'
 import { useEffect, useState } from 'react'
@@ -26,8 +28,7 @@ import { useSelector } from 'react-redux'
 import Test from './Test'
 import ProtectedRoutes from './components/Routes/ProtectedRoute'
 import axios from 'axios'
-import {Elements} from '@stripe/react-stripe-js'
-import { loadStripe } from '@stripe/stripe-js'
+
 
 function App () {
   const {user, isAuthenticated} = useSelector(state => state.authData)
@@ -65,10 +66,12 @@ function App () {
           <Route exact path='/password/update' element={<UpdatePassword/>} />
           <Route exact path='/shipping' element={<Shipping/>} />
           <Route exact path='/order/confirm' element={<ConfirmOrder/>} />
-          
           <Route exact path='/process/payment' element={<ProcessPayment/>} />
+          <Route exact path='/success' element={<PaymentSuccess/>} />
+           
        
         </Route>
+        <Route exact path='/orders' element={<MyOrders/>} />
         <Route exact path='/password/forgot' element={<ForgotPassword/>} />
         <Route exact path='/password/reset/:token' element={<ResetPassword/>} />
         <Route path='/products/:keyword' element={<Products/>} />

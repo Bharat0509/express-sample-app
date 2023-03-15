@@ -11,11 +11,12 @@ export const setCookie=(req,res,next)=>{
      const token ="Please Work now ..";
 
   // options for cookie
-  const options = {
+ const options = {
     expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
-    httpOnly: true
+    httpOnly: true,
+    sameSite:"None",
+    secure:true
   }
-
   res.status(200).cookie('token', token, options).json({
     success: true,
   token})
@@ -24,7 +25,7 @@ export const setCookie=(req,res,next)=>{
 //Test For Cookies are working or not
 export const getCookie=(req,res,next)=>{
  
-
+  const token=req.cookies.token;
   res.status(200).json({
     success: true,
     message:'cookied is set',

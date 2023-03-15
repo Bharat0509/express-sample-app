@@ -1,7 +1,11 @@
 import { CLEAR_ERRORS, CLEAR_TOKEN_SUCCESS, FORGOT_PASSWORD_FAIL, FORGOT_PASSWORD_SUCCESS, LOAD_USER_FAIL, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_FAIL, LOGOUT_SUCCESS, REGISTER_FAIL, REGISTER_REQUEST, REGISTER_SUCCESS, RESET_PASSWORD_FAIL, RESET_PASSWORD_REQUEST, RESET_PASSWORD_SUCCESS, SET_TOKEN_SUCCESS, UPDATE_PASSWORD_FAIL, UPDATE_PASSWORD_REQUEST, UPDATE_PASSWORD_SUCCESS, UPDATE_PROFILE_FAIL, UPDATE_PROFILE_REQUEST, UPDATE_PROFILE_SUCCESS } from '../constants/userContants'
 import axios from 'axios'
-const config = { withCredentials: true ,headers: {
-    'Content-Type': 'application/json',
+const config = { 
+    withCredentials:true,
+    headers: {
+     "Content-Type": "application/json",
+     "Access-Control-Allow-Credentials": true,
+     
     
   }}
 //Login A User Action

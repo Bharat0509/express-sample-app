@@ -1,15 +1,20 @@
 // Creating Tokens
+import Cookies from 'js-cookie'
+
 const sendToken = (user, statusCode, res) => {
 
   const token = user.getJWTToken()
   console.log(token);
+  //undefinded aa raha hai
   // options for cookie
-  const options = {
+    const options = {
     expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
-    httpOnly: true
+    httpOnly: true,
+    sameSite:"None",
+    secure:true
   }
   user = {...user._doc, token}
-  return res.status(statusCode).cookie('token', token, options).json({
+  return res.cookie('token', token, options).status(statusCode).json({
     success: true,
    user})
 }
