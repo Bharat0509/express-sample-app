@@ -11,9 +11,7 @@ const config = {
     headers: {
      "Content-Type": "application/json",
      "Access-Control-Allow-Credentials": true,
-     "Access-Control-Allow-Origin":'*'
-     
-    
+         
   }}
 //Login A User Action
 export const login=(email,password)=>async(dispatch)=>{
