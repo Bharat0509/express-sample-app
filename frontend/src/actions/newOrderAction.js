@@ -2,6 +2,12 @@ import { CLEAR_ERRORS, CREATE_ORDER_FAIL, CREATE_ORDER_REQUEST, CREATE_ORDER_SUC
 import axios from 'axios'
 
 
+///////////////////////////////////////////////////////////////
+//REQUEST URL
+const   REQUEST_URL="https://bharatecommerce.onrender.com"
+
+///////////////////////////////////////////////////////////////
+
 //Create Order
 export const createOrder=(order)=>async (dispatch)=>{
     try {
@@ -11,7 +17,7 @@ export const createOrder=(order)=>async (dispatch)=>{
                 "Content-Type":'application/json'
             }
         }
-        const {data}=await axios.post("http://localhost:4000/api/v1/order/new",order,config)
+        const {data}=await axios.post(`${REQUEST_URL}/api/v1/order/new`,order,config)
 
         dispatch({type:CREATE_ORDER_SUCCESS,payload:data})
         
@@ -32,7 +38,7 @@ export const myOrders=(token)=>async (dispatch)=>{
                 "Content-Type":'application/json'
             }
         }
-        const {data}=await axios.post("http://localhost:4000/api/v1/orders/me",{token},config)
+        const {data}=await axios.post(`${REQUEST_URL}/api/v1/orders/me`,{token},config)
 
         dispatch({type:MY_ORDERS_SUCCESS,payload:data.orders})
         

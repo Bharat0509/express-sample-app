@@ -1,5 +1,11 @@
 import { CLEAR_ERRORS, CLEAR_TOKEN_SUCCESS, FORGOT_PASSWORD_FAIL, FORGOT_PASSWORD_SUCCESS, LOAD_USER_FAIL, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_FAIL, LOGOUT_SUCCESS, REGISTER_FAIL, REGISTER_REQUEST, REGISTER_SUCCESS, RESET_PASSWORD_FAIL, RESET_PASSWORD_REQUEST, RESET_PASSWORD_SUCCESS, SET_TOKEN_SUCCESS, UPDATE_PASSWORD_FAIL, UPDATE_PASSWORD_REQUEST, UPDATE_PASSWORD_SUCCESS, UPDATE_PROFILE_FAIL, UPDATE_PROFILE_REQUEST, UPDATE_PROFILE_SUCCESS } from '../constants/userContants'
 import axios from 'axios'
+
+///////////////////////////////////////////////////////////////
+//REQUEST URL
+const   REQUEST_URL="https://bharatecommerce.onrender.com"
+
+///////////////////////////////////////////////////////////////
 const config = { 
     withCredentials:true,
     headers: {
@@ -14,8 +20,8 @@ export const login=(email,password)=>async(dispatch)=>{
         dispatch({type:LOGIN_REQUEST})
         
          
-        // const {data}=await axios.post(`http://127.0.0.1:4000/api/v1/login`,{email,password},{config})
-       const {data}= await axios.post('http://127.0.0.1:4000/api/v1/login',{email,password}, {config})
+        // const {data}=await axios.post(`${REQUEST_URL}/api/v1/login`,{email,password},{config})
+       const {data}= await axios.post(`${REQUEST_URL}/api/v1/login`,{email,password}, {config})
 
         dispatch({type:SET_TOKEN_SUCCESS,payload:data.user.token})
         dispatch({type:LOGIN_SUCCESS,payload:data.user})
@@ -39,7 +45,7 @@ export const register=(userData)=>async(dispatch)=>{
     'Content-Type': 'multipart/form-data',
     
   }}
-        const {data}=await axios.post(`http://127.0.0.1:4000/api/v1/register`,userData,{config})
+        const {data}=await axios.post(`${REQUEST_URL}/api/v1/register`,userData,{config})
 
         dispatch({type:REGISTER_SUCCESS,payload:data.user})
         
@@ -54,7 +60,7 @@ export const loadUser=(token)=>async(dispatch)=>{
     try {
         dispatch({type:LOAD_USER_REQUEST})
     
-        const {data}=await axios.post(`http://127.0.0.1:4000/api/v1/me`,{token},{config})
+        const {data}=await axios.post(`${REQUEST_URL}/api/v1/me`,{token},{config})
 
         dispatch({type:LOAD_USER_SUCCESS,payload:data.user})
 
@@ -70,7 +76,7 @@ export const logout=()=>async(dispatch)=>{
     try {
         
     
-        await axios.get(`http://127.0.0.1:4000/api/v1/logout`,{config})
+        await axios.get(`${REQUEST_URL}/api/v1/logout`,{config})
 
         dispatch({type:CLEAR_TOKEN_SUCCESS})
         dispatch({type:LOGOUT_SUCCESS})
@@ -90,7 +96,7 @@ export const updateProfile=(userData)=>async(dispatch)=>{
             headers: {
     'Content-Type': 'multipart/form-data',
   }}
-        const {data}=await axios.put(`http://127.0.0.1:4000/api/v1/me/update`,userData,{config})
+        const {data}=await axios.put(`${REQUEST_URL}/api/v1/me/update`,userData,{config})
         dispatch({type:UPDATE_PROFILE_SUCCESS,payload:data})
         
         
@@ -111,7 +117,7 @@ export const updatePassword=(password)=>async(dispatch)=>{
             headers: {
     'Content-Type': 'application/json',
   }}
-        const {data}=await axios.put(`http://127.0.0.1:4000/api/v1/password/update`,password,{config})
+        const {data}=await axios.put(`${REQUEST_URL}/api/v1/password/update`,password,{config})
         dispatch({type:UPDATE_PASSWORD_SUCCESS,payload:data})
         
         
@@ -127,7 +133,7 @@ export const forgotPassword=(email)=>async(dispatch)=>{
     try {
         dispatch({type:FORGOT_PASSWORD_SUCCESS})
     
-       const {data}= await axios.post('http://127.0.0.1:4000/api/v1/password/forgot',email, {config})
+       const {data}= await axios.post(`${REQUEST_URL}/api/v1/password/forgot`,email, {config})
 
         // dispatch({type:SET_TOKEN_SUCCESS,payload:data.user.token})
         dispatch({type:FORGOT_PASSWORD_SUCCESS,payload:data.message})
@@ -158,7 +164,7 @@ export const resetPassword=(token,passwords)=>async(dispatch)=>{
             headers: {
     'Content-Type': 'application/json',
   }}
-        const {data}=await axios.put(`http://127.0.0.1:4000/api/v1/password/reset/${token}`,passwords,{config})
+        const {data}=await axios.put(`${REQUEST_URL}/api/v1/password/reset/${token}`,passwords,{config})
         dispatch({type:RESET_PASSWORD_SUCCESS,payload:data.message})
         
         
