@@ -29,7 +29,7 @@ import payment from './routes/paymentRoute.js'
 
 
 //Cors Options 
-const allowedOrigins = ["http://localhost:3000","http://127.0.0.1:3000","http://127.0.0.1:000"];
+const allowedOrigins = ["https://bharatecommerce.onrender.com","http://localhost:3000","http://127.0.0.1:3000","http://127.0.0.1:000"];
 const corsOptions = {
     origin: allowedOrigins,
 optionsSuccessStatus: 200,
