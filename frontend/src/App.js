@@ -36,7 +36,7 @@ function App () {
   const [stripeApiKey, setStripeApiKey] = useState('')
 
   async function getStripeApiKey(){
-    const {data}=await axios.post("http://localhost:4000/api/v1/stripeapikey",{token})
+    const {data}=await axios.post("https://bharatecom.onrender.com/api/v1/stripeapikey",{token})
     setStripeApiKey(data.stripeApiKey)
    
 
