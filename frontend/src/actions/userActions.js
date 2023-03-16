@@ -61,11 +61,11 @@ export const loadUser=(token)=>async(dispatch)=>{
     
         const {data}=await axios.post(`${REQUEST_URL}/api/v1/me`,{token},{config})
 
-        dispatch({type:LOAD_USER_SUCCESS,payload:data.user})
+        dispatch({type:LOAD_USER_SUCCESS,payload:data?.user})
 
         
     } catch (error) {
-        dispatch({type:LOAD_USER_FAIL,payload:error.response.data.message})   
+        dispatch({type:LOAD_USER_FAIL,payload:error.response?.data?.message})   
     }
 }
 
