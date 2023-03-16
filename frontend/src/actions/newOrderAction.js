@@ -1,12 +1,7 @@
 import { CLEAR_ERRORS, CREATE_ORDER_FAIL, CREATE_ORDER_REQUEST, CREATE_ORDER_SUCCESS, MY_ORDERS_FAIL, MY_ORDERS_REQUEST, MY_ORDERS_SUCCESS } from '../constants/orderConstant.js'
 import axios from 'axios'
+import {REQUEST_URL} from '../Constants.js'
 
-
-///////////////////////////////////////////////////////////////
-//REQUEST URL
-const   REQUEST_URL="https://bharatecommerce.onrender.com"
-
-///////////////////////////////////////////////////////////////
 
 //Create Order
 export const createOrder=(order)=>async (dispatch)=>{

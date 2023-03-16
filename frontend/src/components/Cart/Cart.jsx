@@ -32,11 +32,12 @@ const Cart = () => {
     return (
         <>
             {
-                cartItems.length === 0 ? <div className="emptyCard">
-                    <RemoveShoppingCartIcon />
-                    <p>No Product in Your Cart</p>
-                    <Link to={'/products'}>View  Products</Link>
-                </div> :
+                cartItems.length === 0 ?
+                    <div className="emptyCart">
+                        <RemoveShoppingCartIcon />
+                        <p>No Product in Your Cart</p>
+                        <Link to={'/products'}>View  Products</Link>
+                    </div> :
 
 
                     <>
