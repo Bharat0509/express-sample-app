@@ -8,8 +8,8 @@ import Cookies from 'js-cookie'
 export const isAuthenticatedUser=catchAsyncError(async (req,res,next)=>{
 
     console.log("cookies in browser ",req.cookies);
-    const token=req.body;
-    console.log(req.cookies);
+    const {token}=req.body;
+    console.log(req.body);
 
     
     if(!token){
