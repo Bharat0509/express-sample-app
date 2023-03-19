@@ -1,6 +1,7 @@
-import { CLEAR_ERRORS, CREATE_ORDER_FAIL, CREATE_ORDER_REQUEST, CREATE_ORDER_SUCCESS, MY_ORDERS_FAIL, MY_ORDERS_REQUEST, MY_ORDERS_SUCCESS } from '../constants/orderConstant.js'
+import { CLEAR_ERRORS, CREATE_ORDER_FAIL, CREATE_ORDER_REQUEST, CREATE_ORDER_SUCCESS, MY_ORDERS_FAIL, MY_ORDERS_REQUEST, MY_ORDERS_SUCCESS, ORDER_DETAILS_FAIL, ORDER_DETAILS_REQUEST, ORDER_DETAILS_SUCCESS } from '../constants/orderConstant.js'
 import axios from 'axios'
-import {REQUEST_URL} from '../Constants.js'
+import { REQUEST_URL } from '../Constants.js'
+
 
 
 //Create Order
@@ -12,7 +13,7 @@ export const createOrder=(order)=>async (dispatch)=>{
                 "Content-Type":'application/json'
             }
         }
-        const {data}=await axios.post(`${REQUEST_URL}/api/v1/order/new`,order,config)
+        const {data}=await axios.post(`${REQUEST_URL}/api/v1/order/new`,{...order},config)
 
         dispatch({type:CREATE_ORDER_SUCCESS,payload:data})
         
@@ -41,6 +42,27 @@ export const myOrders=(token)=>async (dispatch)=>{
         dispatch({
             type:MY_ORDERS_FAIL,
             payload:error.response.data.message
+        })
+    }
+}
+
+//Get Order Detail
+export const getOrderDetail=(token,id)=>async (dispatch)=>{
+    try {
+        dispatch({type:ORDER_DETAILS_REQUEST})
+        const config={
+            Headers:{
+                "Content-Type":'application/json'
+            }
+        }
+        const {data}=await axios.post(`${REQUEST_URL}/api/v1/order/${id}`,{token},config)
+
+        dispatch({type:ORDER_DETAILS_SUCCESS,payload:data.order})
+        
+    } catch (error) {
+        dispatch({
+            type:ORDER_DETAILS_FAIL,
+            payload:error.response?.data?.message
         })
     }
 }

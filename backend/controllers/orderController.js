@@ -8,10 +8,10 @@ import ApiFeatures from '../utils/apiFeatures.js'
 //Create New Order
 export const newOrder=catchAsynchErrors(async (req,res,next)=>{
     const               
- {shippingInfo,orderItem,paymentInfo,itemsPrice,taxPrice,shippingPrice,totalPrice}=req.body;
+ {shippingInfo,orderItems,paymentInfo,itemsPrice,taxPrice,shippingPrice,totalPrice}=req.body;
 
  const order=await Order.create({
-    shippingInfo,orderItem,paymentInfo,itemsPrice,taxPrice,shippingPrice,totalPrice,
+    shippingInfo,orderItems,paymentInfo,itemsPrice,taxPrice,shippingPrice,totalPrice,
     paidAt:Date.now(),
     user:req.user._id
  })
@@ -25,6 +25,7 @@ export const newOrder=catchAsynchErrors(async (req,res,next)=>{
 
 //Get Single Order
 export const getSingleOrder=catchAsynchErrors(async (req,res,next)=>{
+   
    const order=await Order.findById(req.params.id).populate("user","name email");
 
    if(!order){

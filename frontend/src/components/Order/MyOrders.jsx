@@ -2,32 +2,34 @@ import React, { useEffect } from 'react'
 import './MyOrders.css'
 import MetaData from '../layout/MetaData.js'
 import Loader from '../layout/Loader/Loader'
+import { useNavigate } from 'react-router-dom'
 import { DataGrid } from '@mui/x-data-grid'
 import { Link, Typography } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
-import { types, useAlert } from 'react-alert'
+import { useAlert } from 'react-alert'
 import { myOrders, clearErrors } from '../../actions/newOrderAction'
-import { render } from 'react-dom'
+
 import LaunchIcon from '@mui/icons-material/Launch';
 
 const MyOrders = () => {
 
     const dispatch = useDispatch();
     const alert = useAlert();
+    const navigate = useNavigate();
 
     const { loading, error, orders } = useSelector(state => state.myOrders)
-    const { user } = useSelector(state => state.authData)
+    const { user, isAuthenticated } = useSelector(state => state.authData)
     const { token } = useSelector(state => state.authToken)
 
     const columns = [
         {
-            field: "id", headerName: "Order ID", minWidth: 300, flex: .75
+            field: "id", headerName: "Order ID", maxWidth: 400, flex: 0.20
         },
         {
             field: "status",
-            headerName: "Status", minWidth: 300, flex: 0.5,
+            headerName: "Status", maxWidth: 400, flex: 0.20,
             cellClassName: (params) => {
-                return (params.getValue(params.id, "status")) === "Delivered" ? "greenColor" : "redColor"
+                return (params.getValue(params.id, "status") === "Delivered" ? "greenColor" : "redColor")
             }
 
 
@@ -35,25 +37,24 @@ const MyOrders = () => {
         {
             field: 'itemQuantity',
             headerName: "Items Qty",
-            type: "Number", minWidth: 300, flex: 0.5
+            type: "number", maxWidth: 300, flex: 0.20
         },
         {
             field: "amount",
             headerName: "Amount",
-            type: "number", minWidth: 300, flex: 0.5
+            type: "number", maxWidth: 250, flex: 0.20
         },
         {
             field: "actions",
             headerName: "Actions",
-            minWidth: 150,
+            maxWidth: 100,
+            zIndex: 999,
             type: "number",
-            flex: 0.3,
-            sortable: false,
+
+            sortable: true,
 
             renderCell: (params) => {
-                return (
-                    <Link to={`/order/${params.getValue(params.id, "id")}`}><LaunchIcon /></Link>
-                )
+                return <Link tabIndex={params.tabIndex} href={`/order/${params?.getValue(params.id, "id")}`}><LaunchIcon /></Link>
             }
         }
     ];
@@ -61,10 +62,10 @@ const MyOrders = () => {
     {
         orders && orders.forEach((item, index) => {
             rows.push({
-                itemQuantity: item?.orderItems.length,
-                id: item?._id,
-                status: item?.orderStatus,
-                amount: item?.totalPrice
+                itemQuantity: item.orderItems.length,
+                id: item._id,
+                status: item.orderStatus,
+                amount: item.totalPrice
 
             })
         });
@@ -74,11 +75,14 @@ const MyOrders = () => {
             alert.error(error)
             dispatch(clearErrors());
         }
+        if (!isAuthenticated) navigate('/login?redirect=orders')
+
         dispatch(myOrders(token))
-    }, [dispatch, alert, error])
+
+    }, [dispatch, alert, error, user])
     return (
         <>
-            <MetaData title={`${user.name}-Orders`} />
+            <MetaData title={`${user?.name}-Orders`} />
             {
                 loading ?
 
@@ -95,7 +99,7 @@ const MyOrders = () => {
                             autoHeight
 
                         />
-                        <Typography id="myOrderHeading">{user.name}'s Orders</Typography>
+                        <Typography id="myOrderHeading">{user?.name}'s Orders</Typography>
                     </div>
 
             }

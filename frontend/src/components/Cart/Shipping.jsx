@@ -17,7 +17,7 @@ const Shipping = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const alert = useAlert();
-    const { shippingInfo } = useSelector(state => state.cart)
+    const { shippingInfo, cartItems } = useSelector(state => state.cart)
     const [address, setAddress] = useState("")
     const [city, setCity] = useState("")
     const [state, setState] = useState("")
@@ -35,7 +35,7 @@ const Shipping = () => {
             alert.error("Phone Number is Not Valid ");
             return;
         }
-        const data = { address, city, state, country, pinCode, phoneNo }
+        const data = { cartItems, address, city, state, country, pinCode, phoneNo }
         console.log(data);
         dispatch(saveShippingInfo(data))
         navigate('/order/confirm')

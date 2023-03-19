@@ -7,7 +7,7 @@ const router = express.Router()
 router.route('/register').post(registerUser)
 
 router.route('/setCookies').get(setCookie)
-router.route('/getCookies').get(getCookie)
+router.route('/getCookie').get(getCookie)
 
 router.route('/login').post(loginUser)
 

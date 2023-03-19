@@ -35,14 +35,15 @@ const ProcessPayment = () => {
     //Order Data Creation 
     const order = {
         shippingInfo,
-        orderItems: cartItems,
+        orderItems: [...cartItems],
         itemsPrice: orderInfo.subtotal,
         taxPrice: orderInfo.tax,
         shippingPrice: orderInfo.shippingPrice,
         totalPrice: orderInfo.totalPrice,
-        token
+        token: token
     }
 
+    console.log("order", order);
 
     //Payment Handler
     const paymentHandler = async (e) => {
@@ -90,6 +91,7 @@ const ProcessPayment = () => {
                         id: result.paymentIntent.id,
                         status: result.paymentIntent.status
                     }
+                    console.log("create order =>", order);
                     dispatch(createOrder(order))
                     navigate('/success')
                 }

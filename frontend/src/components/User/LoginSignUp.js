@@ -49,8 +49,10 @@ const LoginSignUp = () => {
         console.log(myForm.avatar);
         dispatch(register(myForm))
     }
-    const redirectLink=location.search ? location.search.split("=")[1] :'account'
+    
     useEffect(()=>{
+        const redirectLink=location.search ? location.search.split("=")[1] : 'account';
+
         if(error){
             alert.error(error)
             dispatch(clearErrors())
@@ -58,11 +60,12 @@ const LoginSignUp = () => {
         if(isAuthenticated){
             navigate(`/${redirectLink}`);
         }
-        else {
+        else{
             navigate("/login")
         }
+        
 
-    },[dispatch,alert,error,isAuthenticated,navigate,location,redirectLink])
+    },[dispatch,alert,error,isAuthenticated,navigate])
     const switchTab = (e, tab) => {
         if (tab === "Login") {
             switcherTab.current.classList.add("shiftToNeutral")

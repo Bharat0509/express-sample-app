@@ -7,17 +7,17 @@ import Cookies from 'js-cookie'
 
 export const isAuthenticatedUser=catchAsyncError(async (req,res,next)=>{
 
-    console.log("cookies in browser ",req.cookies);
+    console.log(req.cookies);
     const {token}=req.body;
-    console.log(req.body);
 
-    
     if(!token){
         return next(new ErrorHandler("Please Login To Access More..."))
     }
     const decodedData=jwt.verify(token,process.env.JWT_KEY);
 
     req.user=await User.findById(decodedData.id);
+
+    
 
     next();
 

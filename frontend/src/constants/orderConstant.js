@@ -12,5 +12,12 @@ export const MY_ORDERS_SUCCESS = 'MY_ORDERS_SUCCESS'
 
 export const MY_ORDERS_FAIL = 'MY_ORDERS_FAIL'
 
+// Create Order Constants
+export const ORDER_DETAILS_REQUEST = 'ORDER_DETAILS_REQUEST'
+
+export const ORDER_DETAILS_SUCCESS = 'ORDER_DETAILS_SUCCESS'
+
+export const ORDER_DETAILS_FAIL = 'ORDER_DETAILS_FAIL'
+
 // Clear Errros
 export const CLEAR_ERRORS = 'CLEAR_ERRORS'

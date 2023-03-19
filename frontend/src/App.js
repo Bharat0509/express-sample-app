@@ -18,6 +18,7 @@ import ConfirmOrder from './components/Cart/ConfirmOrder.jsx'
 import ProcessPayment from './components/Cart/ProcessPayment.jsx'
 import PaymentSuccess from './components/Cart/PaymentSuccess.jsx'
 import MyOrders from './components/Order/MyOrders.jsx'
+import MyOrderDetails from './components/Order/MyOrderDetails.jsx'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import webfont from 'webfontloader'
 import { useEffect, useState } from 'react'
@@ -28,7 +29,7 @@ import { useSelector } from 'react-redux'
 import Test from './Test'
 import ProtectedRoutes from './components/Routes/ProtectedRoute'
 import axios from 'axios'
-
+import {REQUEST_URL} from './Constants'
 
 function App () {
   const {user, isAuthenticated} = useSelector(state => state.authData)
@@ -36,7 +37,7 @@ function App () {
   const [stripeApiKey, setStripeApiKey] = useState('')
 
   async function getStripeApiKey(){
-    const {data}=await axios.post("https://bharatecom.onrender.com/api/v1/stripeapikey",{token})
+    const {data}=await axios.post(`${REQUEST_URL}/api/v1/stripeapikey`,{token})
     setStripeApiKey(data.stripeApiKey)
    
 
@@ -68,10 +69,9 @@ function App () {
           <Route exact path='/order/confirm' element={<ConfirmOrder/>} />
           <Route exact path='/process/payment' element={<ProcessPayment/>} />
           <Route exact path='/success' element={<PaymentSuccess/>} />
-           
-       
         </Route>
-        <Route exact path='/orders' element={<MyOrders/>} />
+         <Route exact path='/orders' element={<MyOrders/>} />
+          <Route exact path='/order/:id' element={<MyOrderDetails/>} />
         <Route exact path='/password/forgot' element={<ForgotPassword/>} />
         <Route exact path='/password/reset/:token' element={<ResetPassword/>} />
         <Route path='/products/:keyword' element={<Products/>} />

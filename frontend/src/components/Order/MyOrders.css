@@ -1,7 +1,7 @@
 .myOrdersPage {
     width: 100vw;
     max-width: 100%;
-    padding: 0 7vmax;
+    padding: 0 6vmax;
     background-color: rgb(235, 235, 235);
     position: fixed;
     left: 0;
@@ -12,10 +12,20 @@
     flex-direction: column;
 }
 
+.greenColor {
+    color: rgb(51, 223, 51) !important;
+
+}
+
+.redColor {
+    color: red !important;
+}
+
+
 #myOrderHeading {
     text-align: center;
     font: 400 1.2vmax "Roboto";
-    padding: .5vmax;
+    /* padding: .5vmax; */
     box-sizing: border-box;
     color: white;
     background-color: rgb(44, 44, 44);
@@ -23,15 +33,17 @@
 }
 
 .myOrdersTable {
+
     background-color: white;
     padding: 1vmax;
 }
 
 .myOrdersTable div {
     font: 300 1vmax "Roboto";
-    color: rgba(0, 0, 0, 0.75);
+    /* color: rgba(0, 0, 0, 0.75); */
     border: none;
     outline: none;
+    margin-right: .5rem;
 
 }
 
@@ -39,6 +51,7 @@
     cursor: pointer;
     color: rgba(0, 0, 0, 0.75);
     transition: all 500ms;
+    z-index: 100;
 }
 
 .myOrdersTable a:hover {
@@ -54,6 +67,7 @@
     color: white;
     padding: 1vmax !important;
 }
+
 
 @media screen and (max-width:600px) {
     .myOrdersPage {
