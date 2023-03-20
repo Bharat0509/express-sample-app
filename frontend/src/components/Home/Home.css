@@ -81,12 +81,13 @@
 }
 
 .productCard>div {
-    margin: .5vmax;
+    margin: 0 .5vmax;
     display: flex;
     justify-content: flex-start;
+    align-items: center;
 }
 
-.productCard>div>span {
+.productNumOfReviews {
     margin: .5vmax 0.5vmax;
     font: 300 .7vmax "Roboto";
 }
@@ -122,7 +123,7 @@
         margin: 0.5vmax;
     }
 
-    .productCard>div>span {
+    .productNumOfReviews {
         margin: 0 0.5vmax;
         font: 300 1vmax "Roboto";
     }

@@ -19,6 +19,7 @@ import ProcessPayment from './components/Cart/ProcessPayment.jsx'
 import PaymentSuccess from './components/Cart/PaymentSuccess.jsx'
 import MyOrders from './components/Order/MyOrders.jsx'
 import MyOrderDetails from './components/Order/MyOrderDetails.jsx'
+import Dashboard from './components/Admin/Dashboard.jsx'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import webfont from 'webfontloader'
 import { useEffect, useState } from 'react'
@@ -69,9 +70,11 @@ function App () {
           <Route exact path='/order/confirm' element={<ConfirmOrder/>} />
           <Route exact path='/process/payment' element={<ProcessPayment/>} />
           <Route exact path='/success' element={<PaymentSuccess/>} />
+          <Route  path='/admin/dashboard' element={<Dashboard/>} />
         </Route>
          <Route exact path='/orders' element={<MyOrders/>} />
           <Route exact path='/order/:id' element={<MyOrderDetails/>} />
+          
         <Route exact path='/password/forgot' element={<ForgotPassword/>} />
         <Route exact path='/password/reset/:token' element={<ResetPassword/>} />
         <Route path='/products/:keyword' element={<Products/>} />

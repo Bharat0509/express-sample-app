@@ -77,17 +77,19 @@ export const deleteProduct=catchAsynchErrors(async (req,res,next)=>{
 export const createProductReview=catchAsynchErrors(async(req,res,next)=>{
     const {rating,comment,productId}=req.body;
     const Review={
-        user:req.user.id,
+        user:req.user._id,
         name:req.user.name,
+        avatar:req.user.avatar,
         rating:Number(rating),
         comment,
         productId
     }
     const product=await Product.findById(productId);
-    const isReviewed=product.reviews.find(rev=>rev.user===req.user.id);
+    const isReviewed=product.reviews.find(rev=>rev.user.toString()===req.user._id.toString());
     if(isReviewed){
+        
         product.reviews.forEach((rev)=>{
-            if(rev.user===req.user.id){
+            if(rev.user.toString()===req.user._id.toString()){
             rev.rating=rating,
             rev.comment=comment
             }

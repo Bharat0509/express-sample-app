@@ -19,7 +19,7 @@ const UserOptions = ({user}) => {
   const alert=useAlert();
   const navigate=useNavigate();
 
-  const dashboard=()=>navigate('/dashboard')
+  const dashboard=()=>navigate('/admin/dashboard')
   const Orders=()=>navigate('/orders')
   const Account=()=>navigate('/account')
   const Cart=()=>navigate('/cart')
