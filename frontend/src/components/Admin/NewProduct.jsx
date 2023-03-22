@@ -51,7 +51,7 @@ const NewProduct = () => {
     myForm.set("price", Price)
     myForm.set("description", Description)
     myForm.set("category", Category)
-    myForm.set("Stock", Stock)
+    myForm.set("stock", Stock)
     myForm.set("token", token)
 
     images.forEach(image => {
@@ -156,10 +156,10 @@ const NewProduct = () => {
             <div>
               <StorageIcon />
               <input
-                type="number"
+                type="Number"
                 placeholder='Stock'
                 required
-                onChange={e => setStock(e.target.value)}
+                onChange={(e) => setStock(e.target.value)}
               />
             </div>
             {/* <div id="createProductFormFile">

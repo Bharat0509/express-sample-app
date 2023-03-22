@@ -21,6 +21,10 @@ import {
   PRODUCT_DETAILS_FAIL,
   PRODUCT_DETAILS_REQUEST,
   PRODUCT_DETAILS_SUCCESS,
+  UPDATE_PRODUCT_FAIL,
+  UPDATE_PRODUCT_REQUEST,
+  UPDATE_PRODUCT_RESET,
+  UPDATE_PRODUCT_SUCCESS,
  } from "../constants/productConstant"
 
 
@@ -164,28 +168,46 @@ export const newProductReducer = (state = {product: []}, action) => {
 export const productReducer = (state = {product: []}, action) => {
   switch (action.type) {
     case DELETE_PRODUCT_REQUEST:
+      case UPDATE_PRODUCT_REQUEST:
       return {
         loading: true,
         ...state
       }
     case DELETE_PRODUCT_SUCCESS:
+      
       return {
         ...state,
         loading: false,
 
-        idDeleted: action.payload
+        isDeleted: action.payload.success
+    }
+    
+    case UPDATE_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        isUpdated: action.payload
     }
     case DELETE_PRODUCT_FAIL:
+      case UPDATE_PRODUCT_FAIL:
       return {
         ...state,
         loading: false,
         error: action.payload
       }
+    
+      
     case DELETE_PRODUCT_RESET:
       return{
         ...state,
         loading:false,
         isDeleted:false
+      }
+    case UPDATE_PRODUCT_RESET:
+      return{
+        ...state,
+        loading:false,
+        isUpdated:false
       }
     case CLEAR_ERRORS:
       return {

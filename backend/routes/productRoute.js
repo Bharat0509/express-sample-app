@@ -15,7 +15,7 @@ router.route('/admin/product/new').post(isAuthenticatedUser, authorizeRoles('adm
 
 router.route('/product/:id').put(updateProduct)
 
-router.route('/admin/products/:id').put(isAuthenticatedUser, authorizeRoles('admin'), updateProduct)
+router.route('/admin/product/:id').put(isAuthenticatedUser, authorizeRoles('admin'), updateProduct)
 
 router.route('/product/:id').delete(deleteProduct)
 

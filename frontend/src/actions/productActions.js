@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ADMIN_PRODUCT_FAIL, ADMIN_PRODUCT_REQUEST, ADMIN_PRODUCT_SUCCESS, ALL_PRODUCT_FAIL, ALL_PRODUCT_REQUEST, ALL_PRODUCT_SUCCESS, CLEAR_ERRORS, DELETE_PRODUCT_FAIL, DELETE_PRODUCT_REQUEST, DELETE_PRODUCT_SUCCESS, NEW_PRODUCT_FAIL, NEW_PRODUCT_REQUEST, NEW_PRODUCT_SUCCESS, NEW_REVIEW_FAIL, NEW_REVIEW_REQUEST, NEW_REVIEW_SUCCESS, PRODUCT_DETAILS_FAIL, PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_SUCCESS } from '../constants/productConstant'
+import { ADMIN_PRODUCT_FAIL, ADMIN_PRODUCT_REQUEST, ADMIN_PRODUCT_SUCCESS, ALL_PRODUCT_FAIL, ALL_PRODUCT_REQUEST, ALL_PRODUCT_SUCCESS, CLEAR_ERRORS, DELETE_PRODUCT_FAIL, DELETE_PRODUCT_REQUEST, DELETE_PRODUCT_SUCCESS, NEW_PRODUCT_FAIL, NEW_PRODUCT_REQUEST, NEW_PRODUCT_SUCCESS, NEW_REVIEW_FAIL, NEW_REVIEW_REQUEST, NEW_REVIEW_SUCCESS, PRODUCT_DETAILS_FAIL, PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_SUCCESS, UPDATE_PRODUCT_FAIL, UPDATE_PRODUCT_REQUEST, UPDATE_PRODUCT_SUCCESS } from '../constants/productConstant'
 import {REQUEST_URL} from '../Constants.js'
 
 
@@ -108,6 +108,36 @@ export const newProduct=(productData)=>async (dispatch)=>{
         
     }
 }
+
+//Update Product ADMIN 
+export const updateProduct=(id,productData)=>async (dispatch)=>{
+    try {
+        dispatch({
+            type:UPDATE_PRODUCT_REQUEST
+        });
+        const config={
+            Headers:{
+                "Content-Type":"application/json"
+            }
+        }
+        const {data}=await axios.put(`${REQUEST_URL}/api/v1/admin/product/${id}`,productData,config);
+       
+        console.log(data);
+
+        dispatch({
+            type:UPDATE_PRODUCT_SUCCESS,
+            payload:data.success
+        })
+
+    } catch (error) {
+        
+        dispatch({
+            type:UPDATE_PRODUCT_FAIL,
+            payload:error?.response?.data?.error,
+        })
+        
+    }
+}
 //New Review  
 export const newReview=(reviewData)=>async (dispatch)=>{
     try {
@@ -151,7 +181,7 @@ export const deleteProduct=(id,token)=>async (dispatch)=>{
 
         dispatch({
             type:DELETE_PRODUCT_SUCCESS,
-            payload:data.success
+            payload:data
         })
 
     } catch (error) {

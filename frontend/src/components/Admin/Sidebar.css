@@ -24,7 +24,7 @@ a {
     filter: drop-shadow(0 0 10px tomato);
 }
 
-.sidebar a {
+.sidebar a, .sidebar>div {
     text-decoration: none;
     transition: all 500ms;
     color: rgba(0, 0, 0, 0.5);
@@ -32,7 +32,7 @@ a {
 
 }
 
-.sidebar a:hover {
+.sidebar a:hover, .sidebar>div:hover {
     color: tomato;
     transform: scale(1.1);
 }

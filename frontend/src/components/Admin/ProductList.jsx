@@ -36,11 +36,12 @@ const ProductList = () => {
 
         if (isDeleted) {
             alert.success("Product Deleted Successfully");
+
             navigate('/admin/dashboard')
             dispatch({ type: DELETE_PRODUCT_RESET })
         }
         dispatch(getAdminProducts(token))
-    }, [dispatch, alert, error, deleteError, isDeleted, navigate])
+    }, [dispatch, alert, error, deleteError, navigate, isDeleted])
 
     const columns = [
         {
@@ -83,7 +84,7 @@ const ProductList = () => {
 
                 <>
                     <Link to={`/admin/product/${params.getValue(params.id, "id")}`}><EditIcon /></Link>
-                    <Button onClick={e => deleteProductHandler(params.getValue(params.id, "id"))}>
+                    <Button onClick={(e) => deleteProductHandler(params.getValue(params.id, "id"))}>
                         <DeleteIcon />
                     </Button>
 
@@ -111,15 +112,9 @@ const ProductList = () => {
                 <Sidebar />
                 <div className="productListContainer">
                     <h1 className="productListHeading">All Products</h1>
-                    <DataGrid
-                        sx={{ m: 2 }}
-                        rows={rows}
-                        columns={columns}
-                        pageSize={10}
-                        disableSelectionOnClick
-                        className="productListTable"
-                        autoHeight
-                    />
+                    <div style={{ width: '100%' }}>
+                        <DataGrid rows={rows} columns={columns} pageSize={10} autoHeight disableSelectionOnClick />
+                    </div>
                 </div>
             </div>
 
