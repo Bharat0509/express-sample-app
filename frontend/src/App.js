@@ -20,6 +20,8 @@ import PaymentSuccess from './components/Cart/PaymentSuccess.jsx'
 import MyOrders from './components/Order/MyOrders.jsx'
 import MyOrderDetails from './components/Order/MyOrderDetails.jsx'
 import Dashboard from './components/Admin/Dashboard.jsx'
+import ProductList from './components/Admin/ProductList.jsx'
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import webfont from 'webfontloader'
 import { useEffect, useState } from 'react'
@@ -28,9 +30,10 @@ import store from './store'
 import { loadUser } from './actions/userActions'
 import { useSelector } from 'react-redux'
 import Test from './Test'
-import ProtectedRoutes from './components/Routes/ProtectedRoute'
+import ProtectedRoutes, { ProtectedRoutesAdmin } from './components/Routes/ProtectedRoute'
 import axios from 'axios'
 import {REQUEST_URL} from './Constants'
+import NewProduct from './components/Admin/NewProduct'
 
 function App () {
   const {user, isAuthenticated} = useSelector(state => state.authData)
@@ -70,7 +73,13 @@ function App () {
           <Route exact path='/order/confirm' element={<ConfirmOrder/>} />
           <Route exact path='/process/payment' element={<ProcessPayment/>} />
           <Route exact path='/success' element={<PaymentSuccess/>} />
-          <Route  path='/admin/dashboard' element={<Dashboard/>} />
+          
+        </Route>
+        <Route element={<ProtectedRoutesAdmin/>}>
+          <Route isAdmin={true} path='/admin/dashboard' element={<Dashboard/>} />
+          <Route isAdmin={true} path='/admin/products' element={<ProductList/>} />
+          <Route isAdmin={true} path='/admin/product' element={<NewProduct/>} />
+
         </Route>
          <Route exact path='/orders' element={<MyOrders/>} />
           <Route exact path='/order/:id' element={<MyOrderDetails/>} />
