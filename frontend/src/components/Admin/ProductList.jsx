@@ -8,10 +8,12 @@ import { Button } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MetaData from '../layout/MetaData';
 import Sidebar from './Sidebar'
+import { DataGrid } from "@mui/x-data-grid"
 
-import { DataGrid } from '@mui/x-data-grid';
+
 import { clearErrors, getAdminProducts, deleteProduct } from '../../actions/productActions.js'
 import { DELETE_PRODUCT_RESET } from '../../constants/productConstant';
+
 
 const ProductList = () => {
     const dispatch = useDispatch();
@@ -41,6 +43,7 @@ const ProductList = () => {
             dispatch({ type: DELETE_PRODUCT_RESET })
         }
         dispatch(getAdminProducts(token))
+
     }, [dispatch, alert, error, deleteError, navigate, isDeleted])
 
     const columns = [
@@ -83,8 +86,8 @@ const ProductList = () => {
             renderCell: (params) =>
 
                 <>
-                    <Link to={`/admin/product/${params.getValue(params.id, "id")}`}><EditIcon /></Link>
-                    <Button onClick={(e) => deleteProductHandler(params.getValue(params.id, "id"))}>
+                    <Link to={`/admin/product/${params?.id}`}><EditIcon /></Link>
+                    <Button onClick={e => deleteProductHandler(params.id)}>
                         <DeleteIcon />
                     </Button>
 
@@ -105,15 +108,18 @@ const ProductList = () => {
             })
         })
 
+
     return (
         <>
+
             <MetaData title={"All Products-Admin"} />
             <div className="dashboard">
                 <Sidebar />
                 <div className="productListContainer">
                     <h1 className="productListHeading">All Products</h1>
-                    <div style={{ width: '100%' }}>
-                        <DataGrid rows={rows} columns={columns} pageSize={10} autoHeight disableSelectionOnClick />
+                    <div style={{ width: '80vw' }}>
+                        <DataGrid rows={rows} columns={columns} pageSize={10} pagination disableRowSelectionOnClick autoHeight sx={{ m: 2 }} />
+
                     </div>
                 </div>
             </div>
