@@ -23,6 +23,7 @@ import Dashboard from './components/Admin/Dashboard.jsx'
 import ProductList from './components/Admin/ProductList.jsx'
 import UpdateProduct from './components/Admin/UpdateProduct.jsx'
 import OrderList from './components/Admin/OrderList.jsx'
+import UpdateOrder from './components/Admin/UpdateOrder.jsx'
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import webfont from 'webfontloader'
@@ -82,7 +83,8 @@ function App () {
           <Route isAdmin={true} path='/admin/products' element={<ProductList/>} />
           <Route isAdmin={true} path='/admin/product' element={<NewProduct/>} />
           <Route isAdmin={true} path='/admin/product/:id' element={<UpdateProduct/>} />
-<Route isAdmin={true} path='/admin/orders' element={<OrderList/>} />
+          <Route isAdmin={true} path='/admin/orders' element={<OrderList/>} />
+          <Route isAdmin={true} path='/admin/order/:id' element={<UpdateOrder/>} />
 
 
         </Route>

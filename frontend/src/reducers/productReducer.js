@@ -212,6 +212,7 @@ export const productReducer = (state = {product: []}, action) => {
     case CLEAR_ERRORS:
       return {
         ...state,
+        loading:false,
         error: null
       }
     default:
