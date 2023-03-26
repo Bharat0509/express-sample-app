@@ -17,9 +17,6 @@ const config = {
 export const login=(email,password)=>async(dispatch)=>{
     try {
         dispatch({type:LOGIN_REQUEST})
-        
-         
-        // const {data}=await axios.post(`${REQUEST_URL}/api/v1/login`,{email,password},{config})
        const {data}= await axios.post(`${REQUEST_URL}/api/v1/login`,{email,password}, {config})
 
         dispatch({type:SET_TOKEN_SUCCESS,payload:data.user.token})
@@ -27,7 +24,7 @@ export const login=(email,password)=>async(dispatch)=>{
         
         
     } catch (error) {
-        dispatch({type:LOGIN_FAIL,payload:error?.response}) 
+        dispatch({type:LOGIN_FAIL,payload:error?.response?.data?.error}) 
         dispatch({type:CLEAR_TOKEN_SUCCESS})  
     }
 }

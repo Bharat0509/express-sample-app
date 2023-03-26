@@ -9,7 +9,8 @@ const sendToken = (user, statusCode, res) => {
     expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
     httpOnly: true,
     sameSite:"None",
-    secure:true
+// secure:true
+
 
   }
   user = {...user._doc, token}
