@@ -2,7 +2,7 @@ import { legacy_createStore as createStore, applyMiddleware, compose, combineRed
 import thunk from 'redux-thunk'
 import { cartReducer } from './reducers/cartReducer'
 import { allOrdersReducer, myOrderDetailsReducer, myOrdersReducer, newOrderReducer, orderReducer } from './reducers/orderReducer'
-import { newProductReducer, newReviewReducer, productDetailsReducer, productReducer, productsReducer } from './reducers/productReducer'
+import { newProductReducer, newReviewReducer, productDetailsReducer, productReducer, productReviewsDetailsReducer, productsReducer, revieswReducer } from './reducers/productReducer'
 import { allUsersReducer, forgotPasswordReducer, profileReducer, tokenReducer, userDetailsReducer, userReducer } from './reducers/userReducer'
 
 const reducer = combineReducers({
@@ -22,7 +22,9 @@ const reducer = combineReducers({
   allOrders: allOrdersReducer,
   order: orderReducer,
   allUsers: allUsersReducer,
-userDetails: userDetailsReducer})
+  userDetails: userDetailsReducer,
+  productReviews: productReviewsDetailsReducer,
+review: revieswReducer})
 
 function saveToLacalStorage (store) {
   try {

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ADMIN_PRODUCT_FAIL, ADMIN_PRODUCT_REQUEST, ADMIN_PRODUCT_SUCCESS, ALL_PRODUCT_FAIL, ALL_PRODUCT_REQUEST, ALL_PRODUCT_SUCCESS, CLEAR_ERRORS, DELETE_PRODUCT_FAIL, DELETE_PRODUCT_REQUEST, DELETE_PRODUCT_SUCCESS, NEW_PRODUCT_FAIL, NEW_PRODUCT_REQUEST, NEW_PRODUCT_SUCCESS, NEW_REVIEW_FAIL, NEW_REVIEW_REQUEST, NEW_REVIEW_SUCCESS, PRODUCT_DETAILS_FAIL, PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_SUCCESS, UPDATE_PRODUCT_FAIL, UPDATE_PRODUCT_REQUEST, UPDATE_PRODUCT_SUCCESS } from '../constants/productConstant'
+import { ADMIN_PRODUCT_FAIL, ADMIN_PRODUCT_REQUEST, ADMIN_PRODUCT_SUCCESS, ALL_PRODUCT_FAIL, ALL_PRODUCT_REQUEST, ALL_PRODUCT_SUCCESS, ALL_REVIEW_FAIL, ALL_REVIEW_REQUEST, ALL_REVIEW_SUCCESS, CLEAR_ERRORS, DELETE_PRODUCT_FAIL, DELETE_PRODUCT_REQUEST, DELETE_PRODUCT_SUCCESS, DELETE_REVIEW_FAIL, DELETE_REVIEW_REQUEST, DELETE_REVIEW_SUCCESS, NEW_PRODUCT_FAIL, NEW_PRODUCT_REQUEST, NEW_PRODUCT_SUCCESS, NEW_REVIEW_FAIL, NEW_REVIEW_REQUEST, NEW_REVIEW_SUCCESS, PRODUCT_DETAILS_FAIL, PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_SUCCESS, UPDATE_PRODUCT_FAIL, UPDATE_PRODUCT_REQUEST, UPDATE_PRODUCT_SUCCESS } from '../constants/productConstant'
 import {REQUEST_URL} from '../Constants.js'
 
 
@@ -162,6 +162,67 @@ export const newReview=(reviewData)=>async (dispatch)=>{
         
         dispatch({
             type:NEW_REVIEW_FAIL,
+            payload:error.response.data.error,
+        })
+        
+    }
+}
+
+
+//get Reviews admin for a Product  
+export const getReviews=(id,token)=>async (dispatch)=>{
+    try {
+        dispatch({
+            type:ALL_REVIEW_REQUEST
+        });
+        const config={
+            Headers:{
+                "Content-Type":"application/json"
+            }
+        }
+        const {data}=await axios.post(`${REQUEST_URL}/api/v1/reviews?id=${id}`,{token},config);
+       
+        console.log(data);
+
+        dispatch({
+            type:ALL_REVIEW_SUCCESS,
+            payload:data.reviews
+        })
+
+    } catch (error) {
+        
+        dispatch({
+            type:ALL_REVIEW_FAIL,
+            payload:error.response.data.error,
+        })
+        
+    }
+}
+
+//Delete Reviews admin for a Product  
+export const deleteReviews=(reviewId,productId,token)=>async (dispatch)=>{
+    try {
+        dispatch({
+            type:DELETE_REVIEW_REQUEST
+        });
+        const config={
+            Headers:{
+                "Content-Type":"application/json"
+            }
+        }
+        const {data}=await axios.post(`${REQUEST_URL}/api/v1/reviews?id=${reviewId}&productId=${productId}`,{token},config);
+       
+        console.log(data);
+
+        dispatch({
+            type:DELETE_REVIEW_SUCCESS,
+            payload:data.product
+        })
+
+    } catch (error) {
+        
+        dispatch({
+            type:DELETE_REVIEW_FAIL,
             payload:error.response.data.error,
         })
         

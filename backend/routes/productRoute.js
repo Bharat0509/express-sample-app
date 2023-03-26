@@ -23,6 +23,8 @@ router.route('/admin/product/:id').post(isAuthenticatedUser, authorizeRoles('adm
 
 router.route('/review').put(isAuthenticatedUser, createProductReview)
 
-router.route('/reviews').get(getProductReviews).delete(isAuthenticatedUser, deleteProductReview)
+router.route('/reviews').post(getProductReviews)
+
+router.route('/delete/reviews').post(isAuthenticatedUser, deleteProductReview)
 
 export default router
