@@ -59,11 +59,13 @@ export const getAllOrder=catchAsynchErrors(async (req,res,next)=>{
 export const updateOrderStatus=catchAsynchErrors(async (req,res,next)=>{
    let order=await Order.findById(req.params.id);
    if(order.orderStatus==="Delivered"){
-      return next(new ErrorHandler("Ordered Delivered Succesfully",404));
+      return next(new ErrorHandler("Order Delivered Succesfully",404));
    }
+   if(order.orderStatus==="Processing" && req.body.status=="Shipped"){
    order.orderItems.forEach(async order=>{
-      await updateStock(order.product,order.id)
+      await updateStock(order.product,order.quantity)
    })
+}
 
    order.orderStatus=req.body.status;
    if(req.body.status==="Delivered")
@@ -78,16 +80,17 @@ export const updateOrderStatus=catchAsynchErrors(async (req,res,next)=>{
    })
 
    async function updateStock(id,quantity){
-      const product=await Product.findById(id);
-      product.stock-=quantity;
-      await product.save();
 
+         const product=await Product.findById(id);
+         product.stock=product.stock-Number(quantity);
+         await product.save();
    }
    
 })
 
 //delete Orders--Admin
 export const deleteOrder=catchAsynchErrors(async (req,res,next)=>{
+   console.log(req.params.id,"deleting product");
    const order=await Order.findById(req.params.id);
    await order.remove();
    res.status(200).json({

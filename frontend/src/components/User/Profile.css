@@ -31,6 +31,7 @@
     width: 20vmax;
     aspect-ratio: 1/1;
     border-radius: 50%;
+    object-fit: contain;
     transition: all 500ms;
 }
 

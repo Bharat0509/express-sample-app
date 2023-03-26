@@ -3,7 +3,7 @@ import thunk from 'redux-thunk'
 import { cartReducer } from './reducers/cartReducer'
 import { allOrdersReducer, myOrderDetailsReducer, myOrdersReducer, newOrderReducer, orderReducer } from './reducers/orderReducer'
 import { newProductReducer, newReviewReducer, productDetailsReducer, productReducer, productsReducer } from './reducers/productReducer'
-import { forgotPasswordReducer, profileReducer, tokenReducer, userReducer } from './reducers/userReducer'
+import { allUsersReducer, forgotPasswordReducer, profileReducer, tokenReducer, userDetailsReducer, userReducer } from './reducers/userReducer'
 
 const reducer = combineReducers({
   authToken: tokenReducer,
@@ -20,7 +20,9 @@ const reducer = combineReducers({
   newReview: newReviewReducer,
   newProduct: newProductReducer,
   allOrders: allOrdersReducer,
-order: orderReducer})
+  order: orderReducer,
+  allUsers: allUsersReducer,
+userDetails: userDetailsReducer})
 
 function saveToLacalStorage (store) {
   try {

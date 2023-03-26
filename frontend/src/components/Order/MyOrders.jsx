@@ -29,7 +29,7 @@ const MyOrders = () => {
             field: "status",
             headerName: "Status", maxWidth: 400, flex: 0.20,
             cellClassName: (params) => {
-                return (params.getValue(params.id, "status") === "Delivered" ? "greenColor" : "redColor")
+                return (params?.rows?.status === "Delivered" ? "greenColor" : "redColor")
             }
 
 
@@ -54,7 +54,7 @@ const MyOrders = () => {
             sortable: true,
 
             renderCell: (params) => {
-                return <Link tabIndex={params.tabIndex} href={`/order/${params?.getValue(params.id, "id")}`}><LaunchIcon /></Link>
+                return <Link tabIndex={params.tabIndex} href={`/order/${params?.rows?.id}`}><LaunchIcon /></Link>
             }
         }
     ];

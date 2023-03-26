@@ -241,16 +241,11 @@ export const getUserDetailAdmin=catchAsynchErrors(async(req,res,next)=>{
 //Update User Role -- Admin
 export const updateUserRole=catchAsynchErrors(async (req,res,next)=>{
     
-    const newUserData={
-        name:req.body.name,
-        email:req.body.email,
-        role:req.body.role
-    }
-    const user=await User.findByIdAndUpdate(req.user.id,newUserData,{
-        new:true,
-        runValidators:true,
-        useFindAndModify:false
-    });
+    
+    const user=await User.findById(req.user.id);
+    if(!user) return next(new ErrorHandler("User Does Not Exist With GIven Id",404));
+    
+    await User.findByIdAndUpdate(req.params.id,req.body,{new:true,runValidators:true})
 
     res.status(200).json({
         success:true,
@@ -263,9 +258,11 @@ export const deleteUser=catchAsynchErrors(async (req,res,next)=>{
     
     const user=await User.findById(req.params.id);
    if(!user) return next(new ErrorHandler("User Doen Not Exist With Given Id",404))
+    const imageId=user.avatar.public_id;
+    await cloudinary.v2.uploader.destroy(imageId);
     await user.remove();
     res.status(200).json({
         success:true,
-        user
+        message:"User Deleted Successfully"
     })
 })

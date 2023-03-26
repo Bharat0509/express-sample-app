@@ -23,8 +23,12 @@ router.route('/password/update').put(isAuthenticatedUser, updateUserPassword)
 
 router.route('/me/update').put(isAuthenticatedUser, updateUserProfile)
 
-router.route('/admin/users').get(isAuthenticatedUser, authorizeRoles('admin'), getAllUser)
+router.route('/admin/users').post(isAuthenticatedUser, authorizeRoles('admin'), getAllUser)
 
-router.route('/admin/user/:id').get(isAuthenticatedUser, authorizeRoles('admin'), getUserDetailAdmin).put(isAuthenticatedUser, authorizeRoles('admin'), updateUserRole).delete(isAuthenticatedUser, authorizeRoles('admin'), deleteUser)
+router.route('/admin/user/:id').post(isAuthenticatedUser, authorizeRoles('admin'), getUserDetailAdmin)
+
+router.route('/admin/user/:id').put(isAuthenticatedUser, authorizeRoles('admin'), updateUserRole)
+
+router.route('/admin/user/delete/:id').post(isAuthenticatedUser, authorizeRoles('admin'), deleteUser)
 
 export default router

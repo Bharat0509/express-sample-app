@@ -13,7 +13,7 @@ import {useAlert} from 'react-alert'
 
 const LoginSignUp = () => {
     const dispatch = useDispatch();
-    const alert=useAlert();
+    // const alert=useAlert();
     const location=useLocation();
     const navigate=useNavigate();
  
@@ -53,10 +53,10 @@ const LoginSignUp = () => {
     useEffect(()=>{
         const redirectLink=location.search ? location.search.split("=")[1] : 'account';
 
-        if(error){
-            alert.error(error)
-            dispatch(clearErrors())
-        }
+        // if(error){
+        //     alert.error(error)
+        //     dispatch(clearErrors())
+        // }
         if(isAuthenticated){
             navigate(`/${redirectLink}`);
         }
@@ -65,7 +65,7 @@ const LoginSignUp = () => {
         }
         
 
-    },[dispatch,alert,error,isAuthenticated,navigate])
+    },[dispatch,error,isAuthenticated,navigate])
     const switchTab = (e, tab) => {
         if (tab === "Login") {
             switcherTab.current.classList.add("shiftToNeutral")

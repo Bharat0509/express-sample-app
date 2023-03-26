@@ -24,6 +24,7 @@ import ProductList from './components/Admin/ProductList.jsx'
 import UpdateProduct from './components/Admin/UpdateProduct.jsx'
 import OrderList from './components/Admin/OrderList.jsx'
 import UpdateOrder from './components/Admin/UpdateOrder.jsx'
+import UpdateUser from './components/Admin/UpdateUser.jsx'
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import webfont from 'webfontloader'
@@ -37,6 +38,7 @@ import ProtectedRoutes, { ProtectedRoutesAdmin } from './components/Routes/Prote
 import axios from 'axios'
 import {REQUEST_URL} from './Constants'
 import NewProduct from './components/Admin/NewProduct'
+import UserList from './components/Admin/UserList'
 
 function App () {
   const {user, isAuthenticated} = useSelector(state => state.authData)
@@ -63,10 +65,10 @@ function App () {
       <Header/>
       {isAuthenticated && <UserOptions user={user} />}
       <Routes>
-        <Route exact path='/' element={<Home/>} />
+        <Route exact path='/' element={<Home/>} /> 
         <Route exact path='/product/:id' element={<ProductDetails/>} />
         <Route exact path='/products' element={<Products/>} />
-        <Route exact path='/search' element={<Search/>} />
+        <Route exact path='/search' element={<Search/>} /> 
         <Route exact path='/login' element={<LoginSignUp/>} />
         <Route element={<ProtectedRoutes stripeKey={stripeApiKey}/>}>
           <Route exact path='/account' element={<Profile/>} />
@@ -85,6 +87,8 @@ function App () {
           <Route isAdmin={true} path='/admin/product/:id' element={<UpdateProduct/>} />
           <Route isAdmin={true} path='/admin/orders' element={<OrderList/>} />
           <Route isAdmin={true} path='/admin/order/:id' element={<UpdateOrder/>} />
+          <Route isAdmin={true} path='/admin/users' element={<UserList/>} />
+          <Route isAdmin={true} path='/admin/user/:id' element={<UpdateUser/>} />
 
 
         </Route>

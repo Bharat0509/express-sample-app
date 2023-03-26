@@ -10,20 +10,21 @@ const ProtectedRoutes = ({stripeKey}) => {
   useEffect(() => {
   }, [isAuthenticated, stripeKey])
   return (
-  loading && stripeKey ? <Loader/> : (isAuthenticated ? <Elements stripe={loadStripe('pk_test_51MfGEmSFoYXjK6ahTQWkGAkRpdkVcW8cekaQrpUyQdlv8DoqXzU5cHlevv6B664nfqNmJbSLkSiM7w1KOANCBVMV00SHK5U1cu')}>
+  (loading && stripeKey )? <Loader/> : (isAuthenticated ? <Elements stripe={loadStripe('pk_test_51MfGEmSFoYXjK6ahTQWkGAkRpdkVcW8cekaQrpUyQdlv8DoqXzU5cHlevv6B664nfqNmJbSLkSiM7w1KOANCBVMV00SHK5U1cu')}>
                                                           <Outlet/>
                                                         </Elements> : <Navigate to={'/login'} />)
   )
 }
 
 export const ProtectedRoutesAdmin = ({isAdmin}) => {
-  const {loading, isAuthenticated, user} = useSelector(state => state.authData)
+  const {loading, user,isAuthenticated} = useSelector(state => state.authData)
+
   useEffect(() => {
   }, [isAuthenticated])
   return (
-  loading ? <Loader/> :
+  loading  ? <Loader/> :
     (
-    ((isAdmin && user.role !== 'admin') || !isAuthenticated) ? <Navigate to={'/login'} />
+    ((isAdmin && user?.role !== 'admin') || !isAuthenticated) ? <Navigate to={'/login'} />
       :
       <Outlet/>
 

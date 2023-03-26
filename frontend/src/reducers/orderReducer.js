@@ -109,14 +109,14 @@ export const orderReducer = (state = {order:{}} , action) => {
            return{
             ...state,
             loading:false,
-            isDeleted:action.payload,
+            isUpdated:action.payload,
            }
 
             case DELETE_ORDER_SUCCESS:
            return{
             ...state,
             loading:false,
-            isUpdated:action.payload,
+            isDeleted:action.payload,
            }
         case UPDATE_ORDER_FAIL:
             case DELETE_ORDER_FAIL:

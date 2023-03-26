@@ -8,6 +8,10 @@ import { Doughnut, Line } from 'react-chartjs-2';
 import { CategoryScale, Chart, LinearScale, PointElement, LineElement, ArcElement, Tooltip, Legend } from "chart.js";
 import { getAdminProducts } from '../../actions/productActions.js'
 
+import { getAllOrders } from '../../actions/newOrderAction';
+import { getAllUsers } from '../../actions/userActions.js'
+
+
 Chart.register(CategoryScale);
 Chart.register(LinearScale);
 Chart.register(PointElement);
@@ -22,6 +26,8 @@ const Dashboard = () => {
     const dispatch = useDispatch();
     const { token } = useSelector(state => state.authToken)
     const { products } = useSelector(state => state.products)
+    const { orders } = useSelector(state => state.allOrders)
+    const { users } = useSelector(state => state.allUsers)
     let outOfStock = 0;
     products &&
         products?.forEach(item => {
@@ -30,6 +36,8 @@ const Dashboard = () => {
 
     useEffect(() => {
         dispatch(getAdminProducts(token))
+        dispatch(getAllOrders(token))
+        dispatch(getAllUsers(token))
     }, [dispatch, token])
     const lineState = {
         labels: ["Initial Amount", "Amount Earned"],
@@ -75,12 +83,12 @@ const Dashboard = () => {
 
                         <Link to={'/admin/orders'}>
                             <p>Orders</p>
-                            <p>9</p>
+                            <p>{orders ? orders.length : 0}</p>
                         </Link>
 
                         <Link to={'/admin/users'}>
                             <p>Users</p>
-                            <p>4</p>
+                            <p>{users ? users.length : 0}</p>
                         </Link>
                     </div>
                 </div>
