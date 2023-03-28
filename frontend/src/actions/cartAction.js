@@ -3,13 +3,6 @@ import { ADD_TO_CARD, REMOVE_CART_ITEM, SAVE_SHIPPING_INFO } from '../constants/
 
 import {REQUEST_URL} from '../Constants.js'
 
-// ///////////////////////////////////////////////////////////////
-// //REQUEST URL
-// const   REQUEST_URL="https://bharatecommerce.onrender.com"
-
-// ///////////////////////////////////////////////////////////////
-
-
 //Add to Card ser Action
 export const addItemToCart=(id,quantity)=>async(dispatch)=>{
  
