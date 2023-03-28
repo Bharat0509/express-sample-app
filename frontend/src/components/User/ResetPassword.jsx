@@ -44,7 +44,11 @@ const ResetPassword = () => {
         if (message) {
             alert.success(message);
 
+<<<<<<< HEAD
             // navigate('/login');
+=======
+            navigate('/login');
+>>>>>>> 97167674476d666bf4b8e94b3da0a45f58f46439
 
         }
 
@@ -59,7 +63,11 @@ const ResetPassword = () => {
                 <div className='resetPasswordBox'>
                     <h2><span className='profile-name'>Reset Pass</span>word</h2>
 
+<<<<<<< HEAD
                     <form className='resetPasswordForm' encType="multipart/form-data" onSubmit={(e) => resetPasswordSubmit}>
+=======
+                    <form className='resetPasswordForm' encType="multipart/form-data" onSubmit={resetPasswordSubmit}>
+>>>>>>> 97167674476d666bf4b8e94b3da0a45f58f46439
 
 
                         <div className='newPassword'>

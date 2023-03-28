@@ -210,13 +210,21 @@ export const deleteReviews=(reviewId,productId,token)=>async (dispatch)=>{
                 "Content-Type":"application/json"
             }
         }
+<<<<<<< HEAD
         const {data}=await axios.post(`${REQUEST_URL}/api/v1/delete/reviews?id=${reviewId}&productId=${productId}`,{token},config);
+=======
+        const {data}=await axios.post(`${REQUEST_URL}/api/v1/reviews?id=${reviewId}&productId=${productId}`,{token},config);
+>>>>>>> 97167674476d666bf4b8e94b3da0a45f58f46439
        
         console.log(data);
 
         dispatch({
             type:DELETE_REVIEW_SUCCESS,
+<<<<<<< HEAD
             payload:data.success
+=======
+            payload:data.product
+>>>>>>> 97167674476d666bf4b8e94b3da0a45f58f46439
         })
 
     } catch (error) {
