@@ -57,7 +57,6 @@ app.use(fileUpload())
 // Connecting to DB
 
 
-<<<<<<< HEAD
 cloudinary.config({
   cloud_name: `${process.env.CLOUDINARY_NAME}`,
   api_key: `${process.env.CLOUDINARY_API_KEY}`,
@@ -71,20 +70,6 @@ api_secret: `${process.env.CLOUDINARY_SECRET_KEY}`
 //   api_key: '887173712287675',
 //   api_secret: 'T8bjOinQ4NWc7mphFRuVA9PDifY'
 // })
-=======
-// cloudinary.config({
-//   cloud_name: process.env.CLOUDINARY_NAME,
-//   api_key: process.env.CLOUDINARY_API_KEY,
-// api_secret: process.env.CLOUDINARY_SECRET_KEY})
-
-// Configuration 
-
-cloudinary.config({
-  cloud_name: 'dbhf7xh4q',
-  api_key: '887173712287675',
-  api_secret: 'T8bjOinQ4NWc7mphFRuVA9PDifY'
-})
->>>>>>> 97167674476d666bf4b8e94b3da0a45f58f46439
 
 // Rotes
 // ********Product Route*********** */
@@ -100,15 +85,12 @@ app.use('/api/v1', order)
 // ********Payment Route*********** */
 app.use('/api/v1', payment)
 
-<<<<<<< HEAD
 app.use(express.static(path.join(__dirname, '../frontend/build')))
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../frontend/build/index.html'))
 })
 
 
-=======
->>>>>>> 97167674476d666bf4b8e94b3da0a45f58f46439
 // ********Error Handler Route*********** */
 app.use(ErrorHandlerMiddleware)
 

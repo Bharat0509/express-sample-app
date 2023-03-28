@@ -13,7 +13,7 @@ import {REQUEST_URL} from '../Constants.js'
 //Add to Card ser Action
 export const addItemToCart=(id,quantity)=>async(dispatch)=>{
  
-       const {data}= await axios.get(`${REQUEST_URL}/api/v1/product/${id}`);
+       const {data}= await axios.get(`/api/v1/product/${id}`);
         
         dispatch({type:ADD_TO_CARD,payload:{
             product:data.product._id,

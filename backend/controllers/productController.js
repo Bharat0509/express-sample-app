@@ -209,13 +209,8 @@ export const getProductReviews=catchAsynchErrors(async (req,res,next)=>{
 //Get All Reviews Of A Product
 
 export const deleteProductReview=catchAsynchErrors(async (req,res,next)=>{
-<<<<<<< HEAD
     
     const product=await Product.findById(req.query.productId);
-=======
-    const product=await Product.findById(req.query.productId);
-
->>>>>>> 97167674476d666bf4b8e94b3da0a45f58f46439
     if(!product){
         return next(new ErrorHandler("Product Not Found",404));
 
@@ -225,13 +220,8 @@ export const deleteProductReview=catchAsynchErrors(async (req,res,next)=>{
 
     
      let avg=0;
-<<<<<<< HEAD
     let ratings=(product.reviews.forEach(rev=>{avg+=Number(rev.rating)}));
     product.ratings=(reviews.length===0 ? 0 : avg/reviews.length);
-=======
-    const ratings=(product.reviews.forEach(rev=>{avg+=Number(rev.rating)}));
-    product.ratings=(avg/reviews.length);
->>>>>>> 97167674476d666bf4b8e94b3da0a45f58f46439
     
 
     const numOfReviews=product.reviews.length;
