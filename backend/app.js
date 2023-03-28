@@ -15,9 +15,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 
-// if(process.env.NODE_ENV!=="PRODUCTION"){
+if(process.env.NODE_ENV!=="PRODUCTION"){
 dotenv.config({path: './backend/config/config.env'})
-// }
+}
 // Handling Uncaught Error
 
 process.on('uncaughtException', (err) => {
@@ -57,19 +57,19 @@ app.use(fileUpload())
 // Connecting to DB
 
 
-cloudinary.config({
-  cloud_name: `${process.env.CLOUDINARY_NAME}`,
-  api_key: `${process.env.CLOUDINARY_API_KEY}`,
-api_secret: `${process.env.CLOUDINARY_SECRET_KEY}`
-})
+// cloudinary.config({
+//   cloud_name: `${process.env.CLOUDINARY_NAME}`,
+//   api_key: `${process.env.CLOUDINARY_API_KEY}`,
+// api_secret: `${process.env.CLOUDINARY_SECRET_KEY}`
+// })
 
 // Configuration 
 
-// cloudinary.config({
-//   cloud_name: 'dbhf7xh4q',
-//   api_key: '887173712287675',
-//   api_secret: 'T8bjOinQ4NWc7mphFRuVA9PDifY'
-// })
+cloudinary.config({
+  cloud_name: 'dbhf7xh4q',
+  api_key: '887173712287675',
+  api_secret: 'T8bjOinQ4NWc7mphFRuVA9PDifY'
+})
 
 // Rotes
 // ********Product Route*********** */
