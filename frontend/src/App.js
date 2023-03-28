@@ -47,7 +47,7 @@ function App () {
   const [stripeApiKey, setStripeApiKey] = useState('')
 
   async function getStripeApiKey(){
-    const {data}=await axios.post(`${REQUEST_URL}/api/v1/stripeapikey`,{token})
+    const {data}=await axios.post(`/api/v1/stripeapikey`,{token})
     setStripeApiKey(data.stripeApiKey)
    
 

@@ -17,7 +17,7 @@ const config = {
 export const login=(email,password)=>async(dispatch)=>{
     try {
         dispatch({type:LOGIN_REQUEST})
-       const {data}= await axios.post(`$/api/v1/login`,{email,password}, {config})
+       const {data}= await axios.post(`${REQUEST_URL}/api/v1/login`,{email,password}, {config})
 
         dispatch({type:SET_TOKEN_SUCCESS,payload:data.user.token})
         dispatch({type:LOGIN_SUCCESS,payload:data.user})
@@ -41,7 +41,7 @@ export const register=(userData)=>async(dispatch)=>{
     'Content-Type': 'multipart/form-data',
     
   }}
-        const {data}=await axios.post(`$/api/v1/register`,userData,{config})
+        const {data}=await axios.post(`${REQUEST_URL}/api/v1/register`,userData,{config})
 
         dispatch({type:REGISTER_SUCCESS,payload:data.user})
         
@@ -56,7 +56,7 @@ export const loadUser=(token)=>async(dispatch)=>{
     try {
         dispatch({type:LOAD_USER_REQUEST})
     
-        const {data}=await axios.post(`$/api/v1/me`,{token},{config})
+        const {data}=await axios.post(`${REQUEST_URL}/api/v1/me`,{token},{config})
 
         dispatch({type:LOAD_USER_SUCCESS,payload:data?.user})
 
@@ -72,7 +72,7 @@ export const logout=()=>async(dispatch)=>{
     try {
         
     
-        await axios.get(`$/api/v1/logout`,{config})
+        await axios.get(`${REQUEST_URL}/api/v1/logout`,{config})
 
         dispatch({type:CLEAR_TOKEN_SUCCESS})
         dispatch({type:LOGOUT_SUCCESS})
@@ -92,7 +92,7 @@ export const updateProfile=(userData)=>async(dispatch)=>{
             headers: {
     'Content-Type': 'multipart/form-data',
   }}
-        const {data}=await axios.put(`$/api/v1/me/update`,userData,{config})
+        const {data}=await axios.put(`${REQUEST_URL}/api/v1/me/update`,userData,{config})
         dispatch({type:UPDATE_PROFILE_SUCCESS,payload:data})
         
         
@@ -113,7 +113,7 @@ export const updatePassword=(password)=>async(dispatch)=>{
             headers: {
     'Content-Type': 'application/json',
   }}
-        const {data}=await axios.put(`$/api/v1/password/update`,password,{config})
+        const {data}=await axios.put(`${REQUEST_URL}/api/v1/password/update`,password,{config})
         dispatch({type:UPDATE_PASSWORD_SUCCESS,payload:data})
         
         
@@ -129,7 +129,7 @@ export const forgotPassword=(email)=>async(dispatch)=>{
     try {
         dispatch({type:FORGOT_PASSWORD_SUCCESS})
     
-       const {data}= await axios.post(`$/api/v1/password/forgot`,email, {config})
+       const {data}= await axios.post(`${REQUEST_URL}/api/v1/password/forgot`,email, {config})
 
         // dispatch({type:SET_TOKEN_SUCCESS,payload:data.user.token})
         dispatch({type:FORGOT_PASSWORD_SUCCESS,payload:data?.message})
@@ -160,7 +160,7 @@ export const resetPassword=(token,passwords)=>async(dispatch)=>{
             headers: {
     'Content-Type': 'application/json',
   }}
-        const {data}=await axios.put(`$/api/v1/password/reset/${token}`,passwords,{config})
+        const {data}=await axios.put(`${REQUEST_URL}/api/v1/password/reset/${token}`,passwords,{config})
         dispatch({type:RESET_PASSWORD_SUCCESS,payload:data.message})
         
         
@@ -176,7 +176,7 @@ export const getAllUsers=(token)=>async(dispatch)=>{
     try {
         dispatch({type:ALL_USERS_REQUEST})
     
-        const {data}=await axios.post(`$/api/v1/admin/users`,{token},{config})
+        const {data}=await axios.post(`${REQUEST_URL}/api/v1/admin/users`,{token},{config})
 
         dispatch({type:ALL_USERS_SUCCESS,payload:data?.users})
 
@@ -194,7 +194,7 @@ export const getUserDetails=(id,token)=>async(dispatch)=>{
     try {
         dispatch({type:USER_DETAILS_REQUEST})
     
-        const {data}=await axios.post(`$/api/v1/admin/user/${id}`,{token},{config})
+        const {data}=await axios.post(`${REQUEST_URL}/api/v1/admin/user/${id}`,{token},{config})
         console.log("user details-->",data);
         dispatch({type:USER_DETAILS_SUCCESS,payload:data?.user})
 
@@ -216,7 +216,7 @@ export const updateUser=(id,userData)=>async(dispatch)=>{
             headers: {
     'Content-Type': 'application/json',
   }}
-        const {data}=await axios.put(`$/api/v1/admin/user/${id}`,userData,{config})
+        const {data}=await axios.put(`${REQUEST_URL}/api/v1/admin/user/${id}`,userData,{config})
         dispatch({type:UPDATE_USER_SUCCESS,payload:data})
         
         
@@ -237,7 +237,7 @@ export const deleteUser=(id,token)=>async(dispatch)=>{
             headers: {
     'Content-Type': 'application/json',
   }}
-        const {data}=await axios.post(`$/api/v1/admin/user/delete/${id}`,{token},{config})
+        const {data}=await axios.post(`${REQUEST_URL}/api/v1/admin/user/delete/${id}`,{token},{config})
         dispatch({type:DELETE_USER_SUCCESS,payload:data})
         
         

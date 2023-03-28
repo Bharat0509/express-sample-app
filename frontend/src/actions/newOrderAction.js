@@ -14,7 +14,7 @@ export const createOrder=(order)=>async (dispatch)=>{
                 "Content-Type":'application/json'
             }
         }
-        const {data}=await axios.post(`/api/v1/order/new`,{...order},config)
+        const {data}=await axios.post(`${REQUEST_URL}/api/v1/order/new`,{...order},config)
 
         dispatch({type:CREATE_ORDER_SUCCESS,payload:data})
         
@@ -35,7 +35,7 @@ export const myOrders=(token)=>async (dispatch)=>{
                 "Content-Type":'application/json'
             }
         }
-        const {data}=await axios.post(`/api/v1/orders/me`,{token},config)
+        const {data}=await axios.post(`${REQUEST_URL}/api/v1/orders/me`,{token},config)
 
         dispatch({type:MY_ORDERS_SUCCESS,payload:data.orders})
         
@@ -56,7 +56,7 @@ export const getAllOrders=(token)=>async (dispatch)=>{
                 "Content-Type":'application/json'
             }
         }
-        const {data}=await axios.post(`/api/v1/admin/orders`,{token},config)
+        const {data}=await axios.post(`${REQUEST_URL}/api/v1/admin/orders`,{token},config)
 
         dispatch({type:ALL_ORDERS_SUCCESS,payload:data.orders})
         
@@ -78,7 +78,7 @@ export const updateOrder=(id,order)=>async (dispatch)=>{
                 "Content-Type":'application/json'
             }
         }
-        const {data}=await axios.put(`/api/v1/admin/order/${id}`,order,config)
+        const {data}=await axios.put(`${REQUEST_URL}/api/v1/admin/order/${id}`,order,config)
 
         dispatch({type:UPDATE_ORDER_SUCCESS,payload:data.success})
         
@@ -100,7 +100,7 @@ export const deleteOrder=(id,token)=>async (dispatch)=>{
                 "Content-Type":'application/json'
             }
         }
-        const {data}=await axios.post(`/api/v1/admin/order/delete/${id}`,{token},config)
+        const {data}=await axios.post(`${REQUEST_URL}/api/v1/admin/order/delete/${id}`,{token},config)
 
         dispatch({type:DELETE_ORDER_SUCCESS,payload:data.success})
         
@@ -121,7 +121,7 @@ export const getOrderDetail=(token,id)=>async (dispatch)=>{
                 "Content-Type":'application/json'
             }
         }
-        const {data}=await axios.post(`/api/v1/order/${id}`,{token},config)
+        const {data}=await axios.post(`${REQUEST_URL}/api/v1/order/${id}`,{token},config)
 
         dispatch({type:ORDER_DETAILS_SUCCESS,payload:data.order})
         
