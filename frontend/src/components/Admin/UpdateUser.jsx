@@ -20,7 +20,6 @@ const UpdateUser = () => {
     const params = useParams();
     const dispatch = useDispatch();
     const alert = useAlert();
-    const { token } = useSelector(state => state.authToken)
     const { loading, error, user } = useSelector(state => state.userDetails)
     const { loading: updateLoading, error: updateError, isUpdated } = useSelector(state => state.profile)
 
@@ -38,7 +37,7 @@ const UpdateUser = () => {
         myForm.set("name", Name)
         myForm.set("email", email)
         myForm.set("role", role)
-        myForm.set("token", token)
+
 
         dispatch(updateUser(params.id, myForm))
 
@@ -50,12 +49,12 @@ const UpdateUser = () => {
     useEffect(() => {
 
         if (!user || user._id !== userId) {
-            dispatch(getUserDetails(userId, token))
+            dispatch(getUserDetails(userId))
 
 
         }
         else {
-            console.log(user);
+
             setName(user.name)
             setEmail(user.email)
             setRole(user.role)
@@ -77,7 +76,7 @@ const UpdateUser = () => {
             dispatch({ type: UPDATE_USER_RESET })
 
         }
-    }, [dispatch, alert, error, navigate, userId, params, isUpdated, user])
+    }, [dispatch, alert, error, navigate, userId, params, isUpdated, user, updateError])
 
     return (
         <>

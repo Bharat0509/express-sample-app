@@ -19,11 +19,10 @@ const ProductList = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const alert = useAlert();
-    const { token } = useSelector(state => state.authToken)
     const { error, products } = useSelector(state => state.products)
     const { error: deleteError, isDeleted } = useSelector(state => state.product)
     const deleteProductHandler = (id) => {
-        dispatch(deleteProduct(id, token))
+        dispatch(deleteProduct(id))
     }
     useEffect(() => {
         if (error) {
@@ -42,7 +41,7 @@ const ProductList = () => {
             navigate('/admin/dashboard')
             dispatch({ type: DELETE_PRODUCT_RESET })
         }
-        dispatch(getAdminProducts(token))
+        dispatch(getAdminProducts())
 
     }, [dispatch, alert, error, deleteError, navigate, isDeleted])
 

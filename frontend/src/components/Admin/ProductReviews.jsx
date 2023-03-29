@@ -11,31 +11,30 @@ import Sidebar from './Sidebar'
 import { DataGrid } from "@mui/x-data-grid"
 import StarIcon from '@mui/icons-material/Star';
 
-import { clearErrors, getAdminProducts, deleteProduct, getReviews, deleteReviews } from '../../actions/productActions.js'
-import { DELETE_PRODUCT_RESET, DELETE_REVIEW_RESET } from '../../constants/productConstant';
+import { clearErrors, getReviews, deleteReviews } from '../../actions/productActions.js'
+import { DELETE_REVIEW_RESET } from '../../constants/productConstant';
 
 
 const ProductReviews = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const alert = useAlert();
-    const { token } = useSelector(state => state.authToken)
     const [productId, setProductId] = useState('')
     const { error, reviews, loading } = useSelector(state => state.productReviews)
     const { error: deleteError, isDeleted } = useSelector(state => state.review)
 
 
     const deleteReviewHandler = (reviewId) => {
-        dispatch(deleteReviews(reviewId, productId, token));
+        dispatch(deleteReviews(reviewId, productId));
     }
     const ProductReviewsSubmitHandler = (e) => {
         e.preventDefault();
-        dispatch(getReviews(productId, token))
+        dispatch(getReviews(productId))
 
     }
     useEffect(() => {
         if (productId.length === 24) {
-            dispatch(getReviews(productId, token))
+            dispatch(getReviews(productId))
         }
         if (error) {
             alert.error(error)

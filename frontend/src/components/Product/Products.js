@@ -21,12 +21,12 @@ const categories = [
   "SmartPhones",
 ]
 
-const Products = ({ match }) => {
+const Products = () => {
 
   const alert = useAlert()
   const params = useParams();
   let keyword = '';
-  const { products, loading, error, productsCount, resultPerPage, filteredProductsCount } = useSelector(state => state.products)
+  const { products, loading, error, resultPerPage, filteredProductsCount } = useSelector(state => state.products)
   const dispatch = useDispatch();
 
 
@@ -37,18 +37,17 @@ const Products = ({ match }) => {
 
   const setCurrentPageNo = (e) => setCurrentPage(e)
   const priceHanler = (e, newPrice) => setPrice(newPrice)
-
+  keyword = params.keyword
   useEffect(() => {
-    keyword = params.keyword
+    
     if (error) {
       alert.error(error);
       dispatch(clearErrors);
     }
     dispatch(getProducts(keyword, currentPage, price, category, ratings))
 
-  }, [dispatch, params.keyword, alert, error, currentPage, price, category, ratings])
+  }, [dispatch, params.keyword, alert, error, currentPage, price, category, ratings,keyword])
 
-  let count = filteredProductsCount;
   return (
     <>
       {loading ? <Loader /> :
@@ -116,13 +115,13 @@ const Products = ({ match }) => {
 
 
           {/* Pagination */}
-          {
-            resultPerPage < productsCount &&
+          { filteredProductsCount && 
+            resultPerPage < filteredProductsCount &&
             <div className="paginationBox">
               <Pagination
                 activePage={currentPage}
                 itemsCountPerPage={resultPerPage}
-                totalItemsCount={productsCount}
+                totalItemsCount={filteredProductsCount}
                 onChange={setCurrentPageNo}
                 nextPageText="Next"
                 prevPageText="Prev"

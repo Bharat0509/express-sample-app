@@ -175,11 +175,7 @@ export const getReviews=(id)=>async (dispatch)=>{
         dispatch({
             type:ALL_REVIEW_REQUEST
         });
-        const config={
-            Headers:{
-                "Content-Type":"application/json"
-            }
-        }
+       
         const {data}=await axios.get(`${REQUEST_URL}/api/v1/reviews?id=${id}`);
        
         console.log(data);
@@ -205,11 +201,7 @@ export const deleteReviews=(reviewId,productId)=>async (dispatch)=>{
         dispatch({
             type:DELETE_REVIEW_REQUEST
         });
-        const config={
-            Headers:{
-                "Content-Type":"application/json"
-            }
-        }
+        
         const {data}=await axios.delete(`${REQUEST_URL}/api/v1/delete/reviews?id=${reviewId}&productId=${productId}`);
        
         console.log(data);

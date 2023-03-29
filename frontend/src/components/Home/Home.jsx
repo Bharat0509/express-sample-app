@@ -6,20 +6,20 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import ProductCard from './ProductCard'
 import Loader from '../layout/Loader/Loader'
-// import { useAlert } from 'react-alert'
+import { useAlert } from 'react-alert'
 
 const Home = () => {
-    // const alert = useAlert();
+    const alert = useAlert();
     const dispatch = useDispatch();
-    const { products, loading, error, productsCount } = useSelector(state => state.products) || [];
+    const { products, loading, error } = useSelector(state => state.products) || [];
     useEffect(() => {
-        // if (error) {
-        //     alert.error(error);
-        //     dispatch(clearErrors)
-        // }
+        if (error) {
+            alert.error(error);
+            dispatch(clearErrors)
+        }
         dispatch(getProducts());
     },
-        [dispatch, error]
+        [dispatch, error, alert]
     );
 
 

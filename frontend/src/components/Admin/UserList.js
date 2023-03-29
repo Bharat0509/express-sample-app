@@ -11,8 +11,7 @@ import Sidebar from './Sidebar'
 import { DataGrid } from "@mui/x-data-grid"
 
 
-import { clearErrors, getAdminProducts, deleteProduct } from '../../actions/productActions.js'
-import { DELETE_PRODUCT_RESET } from '../../constants/productConstant';
+import { clearErrors } from '../../actions/productActions.js'
 import { deleteUser, getAllUsers } from '../../actions/userActions';
 import { DELETE_USER_RESET } from '../../constants/userContants';
 
@@ -21,13 +20,11 @@ const UserList = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const alert = useAlert();
-    const { token } = useSelector(state => state.authToken)
-    // const { error, users } = useSelector(state => state.users)
     const { error: deleteError, isDeleted,message } = useSelector(state => state.profile)
     
     const {error,users}=useSelector(state=>state.allUsers)
     const deleteUserHandler = (id) => {
-        dispatch(deleteUser(id, token))
+        dispatch(deleteUser(id))
     }
     useEffect(() => {
         if (error) {
@@ -47,9 +44,9 @@ alert.error(deleteError)
             navigate('/admin/users')
             dispatch({ type: DELETE_USER_RESET })
         }
-        dispatch(getAllUsers(token))
+        dispatch(getAllUsers())
 
-    }, [dispatch, alert, error, deleteError, navigate, isDeleted])
+    }, [dispatch, alert, error, deleteError, navigate, isDeleted,message])
 
     const columns = [
         {

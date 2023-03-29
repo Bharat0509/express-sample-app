@@ -99,7 +99,7 @@ const ProcessPayment = () => {
             }
         } catch (error) {
             payBtn.current.disabled = false;
-            alert.error(result.error.message ? result.error.message : "Unexpected Error Encountered.")
+            alert.error(error.data?.message ? error.data.message : "Unexpected Error Encountered.")
 
         }
     }

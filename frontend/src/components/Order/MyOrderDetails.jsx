@@ -12,19 +12,18 @@ const MyOrderDetails = () => {
     const dispatch = useDispatch();
     const alert = useAlert();
     const params = useParams();
-    const { user, isAuthenticated } = useSelector(state => state.authData)
     const { order, error, loading } = useSelector(state => state.orderDetails)
-    const { token } = useSelector(state => state.authToken)
 
-    console.log(params);
+
+
     useEffect(() => {
         if (error) {
             alert.error(error)
             dispatch(clearErrors())
         }
 
-        dispatch(getOrderDetail(token, params.id))
-    }, [dispatch, alert, error, , params.id])
+        dispatch(getOrderDetail(params.id))
+    }, [dispatch, alert, error, params.id])
 
     return (
         <>

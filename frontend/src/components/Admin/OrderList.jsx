@@ -18,11 +18,10 @@ const OrderList = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const alert = useAlert();
-    const { token } = useSelector(state => state.authToken)
     const { error, orders } = useSelector(state => state.allOrders)
     const { error: deleteError, isDeleted } = useSelector(state => state.order)
     const deleteOrderHandler = (id) => {
-        dispatch(deleteOrder(id, token))
+        dispatch(deleteOrder(id))
     }
     useEffect(() => {
         if (error) {
@@ -41,7 +40,7 @@ const OrderList = () => {
             navigate('/admin/orders')
             dispatch({ type: DELETE_ORDER_RESET })
         }
-        dispatch(getAllOrders(token))
+        dispatch(getAllOrders())
 
     }, [dispatch, alert, error, deleteError, navigate, isDeleted])
 

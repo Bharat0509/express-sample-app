@@ -31,7 +31,7 @@ const Shipping = () => {
         e.preventDefault();
 
 
-        if (phoneNo.length != 10) {
+        if (phoneNo.length !== 10) {
             alert.error("Phone Number is Not Valid ");
             return;
         }
@@ -51,7 +51,7 @@ const Shipping = () => {
             setPinCode(shippingInfo?.pinCode)
             setPhoneNo(shippingInfo?.phoneNo)
         }
-    }, [alert])
+    }, [alert, shippingInfo])
     return (
         <>
             <MetaData title={`Shipping Info`} />

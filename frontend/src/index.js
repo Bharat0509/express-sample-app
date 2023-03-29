@@ -5,8 +5,6 @@ import App from './App'
 import store from './store'
 import { positions, transitions, Provider as AlertProvider } from 'react-alert'
 import AlertTemplate from 'react-alert-template-basic'
-import { loadStripe } from '@stripe/stripe-js'
-import { Elements } from '@stripe/react-stripe-js'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 

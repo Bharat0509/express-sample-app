@@ -37,13 +37,11 @@ import { useSelector } from 'react-redux'
 import Test from './Test'
 import ProtectedRoutes, { ProtectedRoutesAdmin } from './components/Routes/ProtectedRoute'
 import axios from 'axios'
-import {REQUEST_URL} from './Constants'
 import NewProduct from './components/Admin/NewProduct'
 import UserList from './components/Admin/UserList'
 
 function App () {
   const {user, isAuthenticated} = useSelector(state => state.authData)
-  const {token} = useSelector(state => state.authToken)
   const [stripeApiKey, setStripeApiKey] = useState('')
 
   async function getStripeApiKey(){

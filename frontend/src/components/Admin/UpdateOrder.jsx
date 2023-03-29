@@ -2,7 +2,7 @@ import { Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useAlert } from 'react-alert'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { clearErrors, getOrderDetail, updateOrder } from '../../actions/newOrderAction'
 import Loader from '../layout/Loader/Loader'
 import MetaData from '../layout/MetaData'
@@ -17,10 +17,9 @@ const UpdateOrder = () => {
     const dispatch = useDispatch();
     const { order, error, loading } = useSelector(state => state.orderDetails)
     const { error: updateError, isUpdated } = useSelector(state => state.order)
-    const { token } = useSelector(state => state.authToken)
+
     const [Status, setStatus] = useState("")
 
-    const navigate = useNavigate();
 
     const UpdateOrderSubmitHandler = (e) => {
 
@@ -28,7 +27,7 @@ const UpdateOrder = () => {
         const myForm = new FormData();
 
         myForm.set("status", Status)
-        myForm.set("token", token)
+
 
         dispatch(updateOrder(params.id, myForm))
 
@@ -48,7 +47,7 @@ const UpdateOrder = () => {
             alert.success("Order Updated Successfully")
             dispatch({ type: UPDATE_ORDER_RESET })
         }
-        dispatch(getOrderDetail(token, params.id))
+        dispatch(getOrderDetail(params.id))
     }, [dispatch, alert, error, params.id, isUpdated, updateError])
     return (
         <> {

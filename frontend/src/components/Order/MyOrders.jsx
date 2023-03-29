@@ -59,17 +59,17 @@ const MyOrders = () => {
         }
     ];
     const rows = [];
-    {
-        orders && orders.forEach((item, index) => {
-            rows.push({
-                itemQuantity: item.orderItems.length,
-                id: item._id,
-                status: item.orderStatus,
-                amount: item.totalPrice
 
-            })
-        });
-    }
+    orders && orders.forEach((item, index) => {
+        rows.push({
+            itemQuantity: item.orderItems.length,
+            id: item._id,
+            status: item.orderStatus,
+            amount: item.totalPrice
+
+        })
+    });
+
     useEffect(() => {
         if (error) {
             alert.error(error)
@@ -79,7 +79,7 @@ const MyOrders = () => {
 
         dispatch(myOrders(token))
 
-    }, [dispatch, alert, error, user])
+    }, [dispatch, alert, error, user, isAuthenticated, navigate, token])
     return (
         <>
             <MetaData title={`${user?.name}-Orders`} />
