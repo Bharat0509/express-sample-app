@@ -47,7 +47,7 @@ function App () {
   const [stripeApiKey, setStripeApiKey] = useState('')
 
   async function getStripeApiKey(){
-    const {data}=await axios.post(`/api/v1/stripeapikey`,{token})
+    const {data}=await axios.get(`/api/v1/stripeapikey`)
     setStripeApiKey(data.stripeApiKey)
    
 
@@ -59,8 +59,8 @@ function App () {
         families: ['Roboto', 'Droid Sans', 'Chilanka']
       }
     })
-    store.dispatch(loadUser(token))
-  }, [token])
+    store.dispatch(loadUser())
+  }, [])
   return (
     <Router>
       <Header/>

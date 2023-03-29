@@ -4,10 +4,11 @@ import Cookies from 'js-cookie'
 const sendToken = (user, statusCode, res) => {
 
   const token = user.getJWTToken()
-  console.log(token);
+ 
     const options = {
     expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
     httpOnly: true,
+    sameSite:"None",
     secure:true
   }
   user = {...user._doc, token}

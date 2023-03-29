@@ -51,7 +51,7 @@ export const registerUser=catchAsynchErrors(async (req,res,next)=>{
 
 export const loginUser=catchAsynchErrors(async (req,res,next)=>{
     const {email,password}=req.body;
-    console.log(email,password);
+   
     //checking if user has given password and email both
 
     if(!email || !password){
@@ -60,7 +60,7 @@ export const loginUser=catchAsynchErrors(async (req,res,next)=>{
     }
 
     const user=await User.findOne({email:email}).select("+password");
-    console.log(user);
+    
     if(!user){
         return next(new ErrorHandler("Invalid Email or Password",401));
     }

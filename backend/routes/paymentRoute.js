@@ -7,7 +7,7 @@ router.route('/payment/process').post(
   isAuthenticatedUser,
   processPayment
 )
-router.route('/stripeapikey').post(
+router.route('/stripeapikey').get(
   isAuthenticatedUser,
   sendStripeApiKey
 )

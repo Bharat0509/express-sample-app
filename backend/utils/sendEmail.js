@@ -9,7 +9,7 @@ const sendEmail=async(options)=>{
             pass:process.env.SMPT_PASSWORD
         }
     })
-    console.log(transporter);
+
     const mailOption={
         from:process.env.SMPT_MAIL,
         to:options.email,

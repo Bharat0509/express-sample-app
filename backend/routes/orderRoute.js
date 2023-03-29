@@ -6,12 +6,12 @@ const router = express.Router()
 
 router.route('/order/new').post(isAuthenticatedUser, newOrder)
 
-router.route('/order/:id').post(isAuthenticatedUser, getSingleOrder)
+router.route('/order/:id').get(isAuthenticatedUser, getSingleOrder)
 
-router.route('/orders/me').post(isAuthenticatedUser, myOrders)
+router.route('/orders/me').get(isAuthenticatedUser, myOrders)
 
-router.route('/admin/orders').post(isAuthenticatedUser, authorizeRoles('admin'), getAllOrder)
+router.route('/admin/orders').get(isAuthenticatedUser, authorizeRoles('admin'), getAllOrder)
 
 router.route('/admin/order/:id').put(isAuthenticatedUser, authorizeRoles('admin'), updateOrderStatus)
-router.route('/admin/order/delete/:id').post(isAuthenticatedUser, authorizeRoles('admin'), deleteOrder)
+router.route('/admin/order/delete/:id').delete(isAuthenticatedUser, authorizeRoles('admin'), deleteOrder)
 export default router

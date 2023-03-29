@@ -5,7 +5,7 @@ const router = express.Router()
 
 router.route('/products').get(getAllProducts)
 
-router.route('/admin/products').post(isAuthenticatedUser, authorizeRoles('admin'), getAdminProducts)
+router.route('/admin/products').get(isAuthenticatedUser, authorizeRoles('admin'), getAdminProducts)
 
 router.route('/product/:id').get(getProductDetails)
 
@@ -19,12 +19,12 @@ router.route('/admin/product/:id').put(isAuthenticatedUser, authorizeRoles('admi
 
 router.route('/product/:id').delete(deleteProduct)
 
-router.route('/admin/product/:id').post(isAuthenticatedUser, authorizeRoles('admin'), deleteProduct)
+router.route('/admin/product/:id').delete(isAuthenticatedUser, authorizeRoles('admin'), deleteProduct)
 
 router.route('/review').put(isAuthenticatedUser, createProductReview)
 
-router.route('/reviews').post(getProductReviews)
+router.route('/reviews').get(getProductReviews)
 
-router.route('/delete/reviews').post(isAuthenticatedUser, deleteProductReview)
+router.route('/delete/reviews').delete(isAuthenticatedUser, deleteProductReview)
 
 export default router

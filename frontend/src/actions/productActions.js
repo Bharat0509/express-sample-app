@@ -39,10 +39,10 @@ export const getProducts=(keyword="",currentPage=1,price=[0,100000],category="",
     }
 }
 //GET ALL PRODUCTS ADMIN
-export const getAdminProducts=(token)=>async (dispatch)=>{
+export const getAdminProducts=()=>async (dispatch)=>{
     try {
         dispatch({type:ADMIN_PRODUCT_REQUEST})
-        const {data}=await axios.post(`${REQUEST_URL}/api/v1/admin/products`,{token});
+        const {data}=await axios.get(`${REQUEST_URL}/api/v1/admin/products`);
         dispatch({
             type:ADMIN_PRODUCT_SUCCESS,
             payload:data
@@ -170,7 +170,7 @@ export const newReview=(reviewData)=>async (dispatch)=>{
 
 
 //get Reviews admin for a Product  
-export const getReviews=(id,token)=>async (dispatch)=>{
+export const getReviews=(id)=>async (dispatch)=>{
     try {
         dispatch({
             type:ALL_REVIEW_REQUEST
@@ -180,7 +180,7 @@ export const getReviews=(id,token)=>async (dispatch)=>{
                 "Content-Type":"application/json"
             }
         }
-        const {data}=await axios.post(`${REQUEST_URL}/api/v1/reviews?id=${id}`,{token},config);
+        const {data}=await axios.get(`${REQUEST_URL}/api/v1/reviews?id=${id}`);
        
         console.log(data);
 
@@ -200,7 +200,7 @@ export const getReviews=(id,token)=>async (dispatch)=>{
 }
 
 //Delete Reviews admin for a Product  
-export const deleteReviews=(reviewId,productId,token)=>async (dispatch)=>{
+export const deleteReviews=(reviewId,productId)=>async (dispatch)=>{
     try {
         dispatch({
             type:DELETE_REVIEW_REQUEST
@@ -210,7 +210,7 @@ export const deleteReviews=(reviewId,productId,token)=>async (dispatch)=>{
                 "Content-Type":"application/json"
             }
         }
-        const {data}=await axios.post(`${REQUEST_URL}/api/v1/delete/reviews?id=${reviewId}&productId=${productId}`,{token},config);
+        const {data}=await axios.delete(`${REQUEST_URL}/api/v1/delete/reviews?id=${reviewId}&productId=${productId}`);
        
         console.log(data);
 
@@ -230,13 +230,13 @@ export const deleteReviews=(reviewId,productId,token)=>async (dispatch)=>{
 }
 
 //Delete Product
-export const deleteProduct=(id,token)=>async (dispatch)=>{
+export const deleteProduct=(id)=>async (dispatch)=>{
     try {
         dispatch({
             type:DELETE_PRODUCT_REQUEST
         });
         
-        const {data}=await axios.post(`${REQUEST_URL}/api/v1/admin/product/${id}`,{token});
+        const {data}=await axios.delete(`${REQUEST_URL}/api/v1/admin/product/${id}`);
        
         console.log(data);
 

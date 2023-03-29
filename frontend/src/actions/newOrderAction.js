@@ -27,7 +27,7 @@ export const createOrder=(order)=>async (dispatch)=>{
 }
 
 //Create Order
-export const myOrders=(token)=>async (dispatch)=>{
+export const myOrders=()=>async (dispatch)=>{
     try {
         dispatch({type:MY_ORDERS_REQUEST})
         const config={
@@ -35,7 +35,7 @@ export const myOrders=(token)=>async (dispatch)=>{
                 "Content-Type":'application/json'
             }
         }
-        const {data}=await axios.post(`${REQUEST_URL}/api/v1/orders/me`,{token},config)
+        const {data}=await axios.get(`${REQUEST_URL}/api/v1/orders/me`)
 
         dispatch({type:MY_ORDERS_SUCCESS,payload:data.orders})
         
@@ -48,7 +48,7 @@ export const myOrders=(token)=>async (dispatch)=>{
 }
 
 //get all  Orders
-export const getAllOrders=(token)=>async (dispatch)=>{
+export const getAllOrders=()=>async (dispatch)=>{
     try {
         dispatch({type:ALL_ORDERS_REQUEST})
         const config={
@@ -56,7 +56,7 @@ export const getAllOrders=(token)=>async (dispatch)=>{
                 "Content-Type":'application/json'
             }
         }
-        const {data}=await axios.post(`${REQUEST_URL}/api/v1/admin/orders`,{token},config)
+        const {data}=await axios.get(`${REQUEST_URL}/api/v1/admin/orders`)
 
         dispatch({type:ALL_ORDERS_SUCCESS,payload:data.orders})
         
@@ -92,7 +92,7 @@ export const updateOrder=(id,order)=>async (dispatch)=>{
 
 
 //Delete  Orders
-export const deleteOrder=(id,token)=>async (dispatch)=>{
+export const deleteOrder=(id)=>async (dispatch)=>{
     try {
         dispatch({type:DELETE_ORDER_REQUEST})
         const config={
@@ -100,7 +100,7 @@ export const deleteOrder=(id,token)=>async (dispatch)=>{
                 "Content-Type":'application/json'
             }
         }
-        const {data}=await axios.post(`${REQUEST_URL}/api/v1/admin/order/delete/${id}`,{token},config)
+        const {data}=await axios.delete(`${REQUEST_URL}/api/v1/admin/order/delete/${id}`)
 
         dispatch({type:DELETE_ORDER_SUCCESS,payload:data.success})
         
@@ -113,7 +113,7 @@ export const deleteOrder=(id,token)=>async (dispatch)=>{
 }
 
 //Get Order Detail
-export const getOrderDetail=(token,id)=>async (dispatch)=>{
+export const getOrderDetail=(id)=>async (dispatch)=>{
     try {
         dispatch({type:ORDER_DETAILS_REQUEST})
         const config={
@@ -121,7 +121,7 @@ export const getOrderDetail=(token,id)=>async (dispatch)=>{
                 "Content-Type":'application/json'
             }
         }
-        const {data}=await axios.post(`${REQUEST_URL}/api/v1/order/${id}`,{token},config)
+        const {data}=await axios.get(`${REQUEST_URL}/api/v1/order/${id}`)
 
         dispatch({type:ORDER_DETAILS_SUCCESS,payload:data.order})
         

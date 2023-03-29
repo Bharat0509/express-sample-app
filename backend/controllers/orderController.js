@@ -90,7 +90,7 @@ export const updateOrderStatus=catchAsynchErrors(async (req,res,next)=>{
 
 //delete Orders--Admin
 export const deleteOrder=catchAsynchErrors(async (req,res,next)=>{
-   console.log(req.params.id,"deleting product");
+   
    const order=await Order.findById(req.params.id);
    await order.remove();
    res.status(200).json({

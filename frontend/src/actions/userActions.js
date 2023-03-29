@@ -15,7 +15,7 @@ export const login=(email,password)=>async(dispatch)=>{
         dispatch({type:LOGIN_REQUEST})
        const {data}= await axios.post(`${REQUEST_URL}/api/v1/login`,{email,password}, {config})
 
-        dispatch({type:SET_TOKEN_SUCCESS,payload:data.user.token})
+        // dispatch({type:SET_TOKEN_SUCCESS,payload:data.user.token})
         dispatch({type:LOGIN_SUCCESS,payload:data.user})
         
         
@@ -48,11 +48,11 @@ export const register=(userData)=>async(dispatch)=>{
 }
 
 //Load A User Action
-export const loadUser=(token)=>async(dispatch)=>{
+export const loadUser=()=>async(dispatch)=>{
     try {
         dispatch({type:LOAD_USER_REQUEST})
     
-        const {data}=await axios.post(`${REQUEST_URL}/api/v1/me`,{token},{config})
+        const {data}=await axios.get(`${REQUEST_URL}/api/v1/me`)
 
         dispatch({type:LOAD_USER_SUCCESS,payload:data?.user})
 
@@ -68,9 +68,9 @@ export const logout=()=>async(dispatch)=>{
     try {
         
     
-        await axios.get(`${REQUEST_URL}/api/v1/logout`,{config})
+        await axios.get(`${REQUEST_URL}/api/v1/logout`)
 
-        dispatch({type:CLEAR_TOKEN_SUCCESS})
+        // dispatch({type:CLEAR_TOKEN_SUCCESS})
         dispatch({type:LOGOUT_SUCCESS})
         
     } catch (error) {
@@ -168,11 +168,11 @@ export const resetPassword=(token,passwords)=>async(dispatch)=>{
 
 //Get All users 
 //Load A User Action
-export const getAllUsers=(token)=>async(dispatch)=>{
+export const getAllUsers=()=>async(dispatch)=>{
     try {
         dispatch({type:ALL_USERS_REQUEST})
     
-        const {data}=await axios.post(`${REQUEST_URL}/api/v1/admin/users`,{token},{config})
+        const {data}=await axios.get(`${REQUEST_URL}/api/v1/admin/users`)
 
         dispatch({type:ALL_USERS_SUCCESS,payload:data?.users})
 
@@ -186,11 +186,11 @@ export const getAllUsers=(token)=>async(dispatch)=>{
 
 //Get All users Details
 //Load A User  Details ADMIN
-export const getUserDetails=(id,token)=>async(dispatch)=>{
+export const getUserDetails=(id)=>async(dispatch)=>{
     try {
         dispatch({type:USER_DETAILS_REQUEST})
     
-        const {data}=await axios.post(`${REQUEST_URL}/api/v1/admin/user/${id}`,{token},{config})
+        const {data}=await axios.get(`${REQUEST_URL}/api/v1/admin/user/${id}`)
         console.log("user details-->",data);
         dispatch({type:USER_DETAILS_SUCCESS,payload:data?.user})
 
@@ -224,7 +224,7 @@ export const updateUser=(id,userData)=>async(dispatch)=>{
 
 
 //delete A User Action
-export const deleteUser=(id,token)=>async(dispatch)=>{
+export const deleteUser=(id)=>async(dispatch)=>{
     try {
         dispatch({type:DELETE_USER_REQUEST})
        
@@ -233,7 +233,7 @@ export const deleteUser=(id,token)=>async(dispatch)=>{
             headers: {
     'Content-Type': 'application/json',
   }}
-        const {data}=await axios.post(`${REQUEST_URL}/api/v1/admin/user/delete/${id}`,{token},{config})
+        const {data}=await axios.delete(`${REQUEST_URL}/api/v1/admin/user/delete/${id}`)
         dispatch({type:DELETE_USER_SUCCESS,payload:data})
         
         

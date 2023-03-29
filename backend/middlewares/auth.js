@@ -7,7 +7,7 @@ import Cookies from 'js-cookie'
 
 export const isAuthenticatedUser=catchAsyncError(async (req,res,next)=>{
 
-    const {token}=req.body;
+    const {token}=req.cookies;
 
     if(!token){
         return next(new ErrorHandler("Please Login To Access More..."))
