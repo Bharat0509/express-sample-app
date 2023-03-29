@@ -26,7 +26,7 @@ const ProcessPayment = () => {
     const { shippingInfo, cartItems } = useSelector(state => state.cart)
     const { user } = useSelector(state => state.authData)
     const { error } = useSelector(state => state.newOrder)
-    const { token } = useSelector(state => state.authToken)
+
     const paymentData = {
         amount: Math.round(orderInfo.totalPrice * 100)
     }
@@ -40,7 +40,6 @@ const ProcessPayment = () => {
         taxPrice: orderInfo.tax,
         shippingPrice: orderInfo.shippingPrice,
         totalPrice: orderInfo.totalPrice,
-        token: token
     }
 
     console.log("order", order);
@@ -56,7 +55,7 @@ const ProcessPayment = () => {
                 }
             }
             const { data } = await axios.post("http://localhost:4000/api/v1/payment/process",
-                { paymentData, token },
+                { paymentData },
                 config);
             const client_secret = data.client_secret
 
@@ -83,7 +82,7 @@ const ProcessPayment = () => {
 
             if (result.error) {
                 payBtn.current.disabled = false;
-                alert.error(result.error.message)
+                alert.error(result.error.message ? result.error.message : "Unexpected Error Encountered.")
             }
             else {
                 if (result.paymentIntent.status === "succeeded") {
@@ -91,17 +90,16 @@ const ProcessPayment = () => {
                         id: result.paymentIntent.id,
                         status: result.paymentIntent.status
                     }
-                    console.log("create order =>", order);
                     dispatch(createOrder(order))
                     navigate('/success')
                 }
                 else {
-                    alert.error("There's Some Issue While Processing Your Payment...")
+                    alert.error(result.error.message ? result.error.message : "Unexpected Error Encountered.")
                 }
             }
         } catch (error) {
             payBtn.current.disabled = false;
-            alert.error(error.response.data.message)
+            alert.error(result.error.message ? result.error.message : "Unexpected Error Encountered.")
 
         }
     }
