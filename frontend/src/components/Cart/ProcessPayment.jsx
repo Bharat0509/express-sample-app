@@ -54,7 +54,7 @@ const ProcessPayment = () => {
                     "Content-Type": "application/json"
                 }
             }
-            const { data } = await axios.post("http://localhost:4000/api/v1/payment/process",
+            const { data } = await axios.post("/api/v1/payment/process",
                 { paymentData },
                 config);
             const client_secret = data.client_secret
