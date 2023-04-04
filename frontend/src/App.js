@@ -39,6 +39,9 @@ import ProtectedRoutes, { ProtectedRoutesAdmin } from './components/Routes/Prote
 import axios from 'axios'
 import NewProduct from './components/Admin/NewProduct'
 import UserList from './components/Admin/UserList'
+import ScrollToTop from './ScrollToTop'
+import ServiceInfoCard from './components/Utils/ServiceInfoCard'
+import ServiceToHelp from './components/layout/ServiceToHelpYou/ServiceToHelp'
 
 function App () {
   const {user, isAuthenticated} = useSelector(state => state.authData)
@@ -61,9 +64,10 @@ function App () {
   }, [])
   return (
     <Router>
+      <ScrollToTop/>
       <Header/>
       {isAuthenticated && <UserOptions user={user} />}
-      <Routes>
+       <Routes>
         <Route exact path='/' element={<Home/>} /> 
         <Route exact path='/product/:id' element={<ProductDetails/>} />
         <Route exact path='/products' element={<Products/>} />
@@ -103,7 +107,7 @@ function App () {
 
 
         </Route>
-         
+ 
       </Routes>
       <Footer/>
     </Router>

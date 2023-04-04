@@ -3,26 +3,91 @@ import './footer.css'
 const Footer = () => {
     return (
         <footer id='footer'>
-            <div className="leftFooter">
-                <h4>Download Our App</h4>
-                <p>Download App for Android And IOS mobile Pnones.</p>
-                <img className="playStore" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" alt="" />
-                <img src="appstore.png" alt="" />
+            <div className="h-container-1">
+                <div className="v-container">
+                    <div className="h-stack-1">
+                        <img src="https://uploads-ssl.webflow.com/63e857eaeaf853471d5335ff/63e86ab4c21faa7bc0bd90dd_Logo.svg" alt="" />
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita, porro eius. lore01
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum illo nobis debitis, molestias voluptatibus optio temporibus maiores impedit fugit!
+                        </p>
+                    </div>
+                    <div className="h-stack-2">
+                        <span className="li-heading">Accepted Payments</span>
+                        <div className="p-list-container">
+                            <span className="p-items">Stripe</span>
+                            <span className="p-items">Visa</span>
+                            <span className="p-items">Amazon</span>
+                            <span className="p-items">Stripe</span>
+                            <span className="p-items">Visa</span>
+                            <span className="p-items">Amazon</span>
+                        </div>
+                    </div>
 
+                </div>
+                <div className="v-container">
+                    <span className='li-heading'>Department</span>
+                    <span className="li-items">Electronics & Gadgets</span>
+                    <span className="li-items">Fashion</span>
+                    <span className="li-items">Frozen Foods</span>
+                    <span className="li-items">Beavarages</span>
+                    <span className="li-items">Organic Grocery</span>
+                    <span className="li-items">Office Supplies</span>
+                    <span className="li-items">Beautiy Products</span>
+                    <span className="li-items">Books</span>
+                    <span className="li-items">Toys</span>
+                    <span className="li-items">Fitness</span>
+                    <span className="li-items">Snekers</span>
+                    <span className="li-items">Toys</span>
+                    <span className="li-items">Furnitures</span>
 
+                </div>
+                <div className="v-container">
+                    <span className='li-heading'>About Bettercart</span>
+                    <span className="li-items">Careers</span>
+                    <span className="li-items">News & Blogs</span>
+                    <span className="li-items">Shipping & Delivery</span>
+                    <span className="li-items">Help</span>
+                    <span className="li-items">Press Center</span>
+                    <span className="li-items">Shop by Location</span>
+                    <span className="li-items">Shopcart brands</span>
+                    <span className="li-items">Affiliates & Partners</span>
+                    <span className="li-items">Ideas & Guides</span>
+                </div>
+                <div className="v-container">
+                    <span className='li-heading'>Service</span>
+                    <span className="li-items">Gift Card</span>
+                    <span className="li-items">Mobile App</span>
+                    <span className="li-items">Shipping & Delivery</span>
+                    <span className="li-items">Order Pickup</span>
+                    <span className="li-items">Feedback</span>
+                    <span className="li-items">Account Signup</span>
+                </div>
+                <div className="v-container">
+                    <span className='li-heading'>Help</span>
+                    <span className="li-items">Bettercart Help</span>
+                    <span className="li-items">Returns</span>
+                    <span className="li-items">Track My Orders</span>
+                    <span className="li-items">Contact Us</span>
+                    <span className="li-items">Feedback</span>
+                    <span className="li-items">Security & Frauds</span>
+                </div>
             </div>
-            <div className="midFooter">
-                <h1>BharatEcom</h1>
-                <p>High Quality is Out First Priority.</p>
-                <p>Copyrights 2023 &copy: BharatEcom</p>
-            </div>
+            <div className="h-container-2">
+                <div className="v-container-2">
+                    <div>Become Seller</div>
 
-
-            <div className="rightFooter">
-                <h4>Follow Us</h4>
-                <a href="http://instagram.com/bharat001">Instagram</a>
-                <a href="https://youtube.com">Youtube</a>
-                <a href="http://facebook.com/bharat001">Facebook</a>
+                    <div>Gift Cards</div>
+                    <div>Help Centers</div>
+                </div>
+                <div className="v-container-2">
+                    <div>Terms of Use</div>
+                    <div>Privacy Policy</div>
+                </div>
+                <div className="v-container-2">
+                    <div>
+                        All Right Reserved By Bharat | 2023
+                    </div>
+                </div>
             </div>
         </footer>
 

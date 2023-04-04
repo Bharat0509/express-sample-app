@@ -4,9 +4,59 @@ import MetaData from '../layout/MetaData'
 import { clearErrors, getProducts } from '../../actions/productActions'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
-import ProductCard from './ProductCard'
+import ProductCard from '../Utils/ProductCard'
 import Loader from '../layout/Loader/Loader'
 import { useAlert } from 'react-alert'
+import OurTopCategories from '../Utils/OurTopCategories'
+import Wrapper from '../Utils/Wrapper'
+import ServiceInfoCard from '../Utils/ServiceInfoCard'
+import CategoryCard from '../Utils/CategoryCard'
+
+const Categories = [
+    {
+        title: "Furnitures",
+        img: './Furniture.png'
+    },
+    {
+        title: "Hand Bag",
+        img: './HandBag.png'
+    },
+    {
+        title: "Books",
+        img: './Books.png'
+    },
+    {
+        title: "Tech",
+        img: './Tech.png'
+    },
+    {
+        title: "Sneakers",
+        img: './Snekers.png'
+    },
+    {
+        title: "Travel",
+        img: './Travel.png'
+    }
+]
+
+const service = [
+    {
+        title: "Frequently Asked Questions",
+        desc: 'lorem epsum plase seafe Updae son SAfe Shopping in Our Stores',
+        url: 'https://uploads-ssl.webflow.com/63e857eaeaf853471d5335ff/63e8c4e55b939fea169c0292_faq-min.png'
+    },
+    {
+        title: "Online Payment Process",
+        desc: 'lorem epsum plase seafe Updae son SAfe Shopping in Our Stores',
+        url: 'https://uploads-ssl.webflow.com/63e857eaeaf853471d5335ff/63e8c4e6707380718425e697_onlie%20payment-min.png'
+    },
+    {
+        title: "Home Delivery Options",
+        desc: 'lorem epsum plase seafe Updae son SAfe Shopping in Our Stores',
+        url: 'https://uploads-ssl.webflow.com/63e857eaeaf853471d5335ff/63e8c4e544663ba3d0fd2bb8_home%20delivery-min.png'
+    }
+]
+
 
 const Home = () => {
     const alert = useAlert();
@@ -15,7 +65,7 @@ const Home = () => {
     useEffect(() => {
         if (error) {
             alert.error(error);
-            dispatch(clearErrors)
+            // dispatch(clearErrors)
         }
         dispatch(getProducts());
     },
@@ -30,19 +80,32 @@ const Home = () => {
                     <MetaData title="BharatEcom" />
 
                     <div className="banner">
-                        <p>Welcome To Eccomerce</p>
-                        <h1>Find Amazing Product Below</h1>
-                        <a href="#container">
-                            <button>Scroll <CgMouse /></button>
-                        </a>
-                    </div>
-                    <h2 className="homeHeading">Featured Products</h2>
-                    <div className="container" id='container'>
-                        {
-                            products &&
-                            products?.map(product => <ProductCard key={product._id} product={product} />)
 
-                        }
+                        <img src="https://uploads-ssl.webflow.com/63e857eaeaf853471d5335ff/63e9b930e006824963189865_bg-stage.png" alt="" className="m1" />
+                        <img src="./topStair1.png" alt="" className="m2" />
+                        <img src="./topStair2.png" alt="" className="m3" />
+                        <img src="./topStair3.png" alt="" className="m4" />
+                        <img src="./topStair4.png" alt="" className="m5" />
+                        <div className="details">
+                            <span>Shopping And Department Store</span>
+                            <p>Shopping is a bit of a relaxing hobby for me, which is sometimes troubling for the bank balance.</p>
+                            <a href='#container'><button>Explore More</button></a>
+                        </div>
+                    </div>
+                    <div className="product-container-wrapper" id='container'>
+                        <Wrapper Card={CategoryCard} data={Categories} heading="Shop Our Top Categories" hw={'20rem'} />
+
+
+                    </div>
+
+                    <div className="product-container-wrapper" id='container'>
+                        <Wrapper Card={ProductCard} data={products} heading="Today's Best Deal For You !" hw={'20rem'} />
+
+
+                    </div>
+
+                    <div className="product-container-wrapper" id='container'>
+                        <Wrapper Card={ServiceInfoCard} data={service} heading="Service To Help You Shop " hw={'20rem'} />
 
 
                     </div>

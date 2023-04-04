@@ -1,28 +1,93 @@
 .banner {
-    background-image: linear-gradient(to right, #635dc0, #3027ae);
-    height: 100vmin;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    color: white;
+    position: relative;
+    height: 50vmax;
+    width: 100%;
+
 }
 
-.banner>h1 {
-    margin: 5vmax;
-    font: 600 2.5vmax "Roboto";
+.m1 {
+    background-color: rgb(173, 199, 214);
+    object-fit: cover;
+    position: absolute;
+    width: 100%;
+    z-index: -1;
 }
 
-.banner>p {
+
+.m2 {
+
+    position: absolute;
+    top: 6vmax;
+    right: 10vmax;
+    z-index: 2;
+    height: 12vmax;
+    width: 17vmax;
+    z-index: -1;
+}
+
+.m3 {
+    position: absolute;
+    z-index: -1;
+    top: 14vmax;
+    right: 28vmax;
+    z-index: 2;
+    height: 14vmax;
+    width: 14vmax;
+
+}
+
+.m4 {
+
+    position: absolute;
+    z-index: -1;
+    top: 22vmax;
+    right: 15vmax;
+    z-index: 2;
+    height: 12vmax;
+    width: 15vmax;
+
+}
+
+
+.m5 {
+
+    position: absolute;
+    z-index: -1;
+    top: 26vmax;
+    right: 39vmax;
+    z-index: 2;
+    height: 9vmax;
+    width: 15vmax;
+}
+
+.details {
+    width: 30%;
+    position: absolute;
+    top: 15vmax;
+    z-index: 5;
+    left: 10vmax;
+
+}
+
+.details>span {
+    font-weight: bold;
+    color: rgb(61, 45, 42);
+    font-size: 3vmax;
+}
+
+.details>p {
+    margin: 1vmax 0;
     font: 300 1.5vmax "Lucida Sans";
 }
 
-.banner>a>button {
+.details>a>button {
+    z-index: 5;
     margin-bottom: 5vmax;
     cursor: pointer;
-    background-color: white;
-    border: 1px solid white;
-    border-radius: .25rem;
+    background-color: tomato;
+    color: white;
+    border: none;
+    border-radius: .25vmax;
     width: 9vmax;
     padding: 1vmax;
     transition: 500ms ease;
@@ -30,22 +95,11 @@
 
 }
 
-.banner>a>button:hover {
+.details>a>button:hover {
     background: transparent;
     color: white;
 }
 
-.banner::after {
-    content: "";
-    width: 100vw;
-    height: 100vmin;
-    background-color: #ffff;
-    position: absolute;
-    top: 0%;
-    left: 0;
-    clip-path: polygon(100% 55%, 0% 100%, 100% 100%);
-    max-width: 100%;
-}
 
 .homeHeading {
     text-align: center;
@@ -66,21 +120,23 @@
 
 }
 
-.productCard {
-    width: 14vmax;
+.product-container-wrapper {
+    position: relative;
+    width: 80%;
+    height: 100%;
+    z-index: 1;
     display: flex;
-    flex-direction: column;
-    text-decoration: none;
-    color: rgb(48, 48, 48);
-    margin: 2vmax;
-    transition: 700ms ease;
+    transition-property: transform;
+    box-sizing: content-box;
+    margin: auto;
 }
 
+/* 
 .productCard>img {
     width: 14vmax;
-}
+} */
 
-.productCard>div {
+/* .productCard>div {
     margin: 0 .5vmax;
     display: flex;
     justify-content: flex-start;
@@ -102,11 +158,93 @@
     margin: .5vmax;
     color: tomato;
     font-size: 1vmax;
-}
+} */
 
-.productCard:hover {
-    box-shadow: 0 0 5px rgba(15, 15, 15, .25);
-    transform: translateY(-1vmax);
+
+
+@media screen and (max-width:1024px) {
+    .banner {
+        position: relative;
+        height: 45vw;
+        width: 100%;
+
+    }
+
+    .m1 {
+        background-color: rgb(173, 199, 214);
+        object-fit: cover;
+        position: absolute;
+        width: 100%;
+        z-index: -1;
+    }
+
+
+    .m2 {
+
+        position: absolute;
+        top: 6vw;
+        right: 10vw;
+        z-index: 2;
+        height: 12vw;
+        width: 17vw;
+        z-index: -1;
+    }
+
+    .m3 {
+        position: absolute;
+        z-index: -1;
+        top: 14vw;
+        right: 28vw;
+        z-index: 2;
+        height: 14vw;
+        width: 14vw;
+
+    }
+
+    .m4 {
+
+        position: absolute;
+        z-index: -1;
+        top: 22vw;
+        right: 15vw;
+        z-index: 2;
+        height: 12vw;
+        width: 15vw;
+
+    }
+
+
+    .m5 {
+
+        position: absolute;
+        z-index: -1;
+        top: 26vw;
+        right: 39vw;
+        z-index: 2;
+        height: 9vw;
+        width: 15vw;
+    }
+
+    .details {
+        width: 30%;
+        position: absolute;
+        top: 15vw;
+        z-index: 5;
+        left: 10vw;
+
+    }
+
+    .details>span {
+        font-weight: bold;
+        color: rgb(61, 45, 42);
+        font-size: 3vw;
+    }
+
+    .details>p {
+        margin: 1vw 0;
+        font: 300 1.5vw "Lucida Sans";
+    }
+
 }
 
 @media screen and (max-width:600px) {
