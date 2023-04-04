@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { clearErrors, getProducts } from '../../actions/productActions'
 import Loader from '../layout/Loader/Loader'
-import ProductCard from '../Home/ProductCard'
+import ProductCard from '../Utils/ProductCard'
 import './Products.css'
 import { useEffect, useState } from 'react'
 import Pagination from 'react-js-pagination'
@@ -39,30 +39,56 @@ const Products = () => {
   const priceHanler = (e, newPrice) => setPrice(newPrice)
   keyword = params.keyword
   useEffect(() => {
-    
+
     if (error) {
       alert.error(error);
       dispatch(clearErrors);
     }
     dispatch(getProducts(keyword, currentPage, price, category, ratings))
 
-  }, [dispatch, params.keyword, alert, error, currentPage, price, category, ratings,keyword])
+  }, [dispatch, params.keyword, alert, error, currentPage, price, category, ratings, keyword])
 
   return (
+
+
+
     <>
-      {loading ? <Loader /> :
+      <MetaData title="PRODUCTS---BHARATECOM" />
+      <h2 className='productHeading'>Products</h2>
+      <div className="products-container">
+        {loading ? <Loader /> :
+          <>
+            <div className="products" >
+              {
+                products &&
+                products?.map(product => <ProductCard key={product._id} {...product} />)
+              }
 
-        <>
-          <MetaData title="PRODUCTS---BHARATECOM" />
-          <h2 className='productHeading'>Products</h2>
-          <div className="products" >
-            {
-              products &&
-              products?.map(product => <ProductCard key={product._id} product={product} />)
+
+            </div>
+            {/* Pagination */}
+            {false &&
+              <div className="paginationBox">
+                <Pagination
+                  activePage={currentPage}
+                  itemsCountPerPage={resultPerPage}
+                  totalItemsCount={filteredProductsCount}
+                  onChange={setCurrentPageNo}
+                  nextPageText="Next"
+                  prevPageText="Prev"
+                  firstPageText="1st"
+                  lastPageText="Last"
+                  itemClass="page-item"
+                  linkClass="page-link"
+                  activeClass="pageItemActive"
+                  activeLinkClass="pageLinkActive"
+
+                />
+              </div>
             }
-          </div>
-
-
+          </>
+        }
+        <div className="filter-options">
 
           <div className="filterBox">
 
@@ -114,33 +140,11 @@ const Products = () => {
 
 
 
-          {/* Pagination */}
-          { filteredProductsCount && 
-            resultPerPage < filteredProductsCount &&
-            <div className="paginationBox">
-              <Pagination
-                activePage={currentPage}
-                itemsCountPerPage={resultPerPage}
-                totalItemsCount={filteredProductsCount}
-                onChange={setCurrentPageNo}
-                nextPageText="Next"
-                prevPageText="Prev"
-                firstPageText="1st"
-                lastPageText="Last"
-                itemClass="page-item"
-                linkClass="page-link"
-                activeClass="pageItemActive"
-                activeLinkClass="pageLinkActive"
 
-              />
-            </div>
-          }
-
-        </>
-
-
-      }
+        </div>
+      </div>
     </>
+
   )
 }
 

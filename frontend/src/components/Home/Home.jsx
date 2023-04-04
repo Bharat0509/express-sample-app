@@ -7,10 +7,11 @@ import { useEffect } from 'react'
 import ProductCard from '../Utils/ProductCard'
 import Loader from '../layout/Loader/Loader'
 import { useAlert } from 'react-alert'
-import OurTopCategories from '../Utils/OurTopCategories'
+import Brands from '../Utils/Brands'
 import Wrapper from '../Utils/Wrapper'
 import ServiceInfoCard from '../Utils/ServiceInfoCard'
 import CategoryCard from '../Utils/CategoryCard'
+import Ad from '../Utils/Ad'
 
 const Categories = [
     {
@@ -37,6 +38,50 @@ const Categories = [
         title: "Travel",
         img: './Travel.png'
     }
+]
+
+const brands = [
+    {
+        title: "Staple",
+        img: './brand1.png',
+        time: 12
+
+    },
+    {
+        title: "Sproute",
+        img: './brand2.png',
+        time: 6
+    },
+    {
+        title: "Grocery Oultler",
+        img: './brand3.png',
+        time: 20
+    },
+    {
+        title: "Mollie Stones",
+        img: './brand4.png',
+        time: 40
+    },
+    {
+        title: "Sports Basement",
+        img: './brand5.png',
+        time: 41
+    },
+    {
+        title: "Container Store",
+        img: './brand6.png',
+        time: 4
+    },
+    {
+        title: "Target",
+        img: './brand6.png',
+        time: 14
+    },
+    {
+        title: "Bevmo",
+        img: './brand8.png',
+        time: 15
+    },
 ]
 
 const service = [
@@ -92,6 +137,7 @@ const Home = () => {
                             <a href='#container'><button>Explore More</button></a>
                         </div>
                     </div>
+
                     <div className="product-container-wrapper" id='container'>
                         <Wrapper Card={CategoryCard} data={Categories} heading="Shop Our Top Categories" hw={'20rem'} />
 
@@ -100,6 +146,17 @@ const Home = () => {
 
                     <div className="product-container-wrapper" id='container'>
                         <Wrapper Card={ProductCard} data={products} heading="Today's Best Deal For You !" hw={'20rem'} />
+
+
+                    </div>
+                    <div className="product-container-wrapper" id='container'>
+                        <Wrapper Card={Brands} data={brands} heading="Choose By Brands" hw={'20rem'} />
+
+
+                    </div>
+                    <Ad />
+                    <div className="product-container-wrapper" id='container'>
+                        <Wrapper Card={ProductCard} data={products} heading="Weekly Popular Deal For You !" hw={'20rem'} />
 
 
                     </div>
