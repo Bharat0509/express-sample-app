@@ -24,7 +24,7 @@
     padding: 1vmax;
 }
 
-button {
+.left button {
     border: none;
     margin: 1vmax;
     padding: 1vmax 2vmax;
@@ -35,7 +35,7 @@ button {
     transition: all 400ms linear;
 }
 
-button:hover {
+.left button:hover {
     color: white;
     background-color: darkgray;
 }
