@@ -42,6 +42,8 @@ const corsOptions = {
         'http://127.0.0.1:3000',
         'http://localhost:4000',
         'http://localhost:3000',
+        'https://shopswift.onrender.com/',
+        'https://shopswift.onrender.com',
         'https://tiny-plum-coyote-vest.cyclic.app/',
         'https://tiny-plum-coyote-vest.cyclic.app'
     ],
