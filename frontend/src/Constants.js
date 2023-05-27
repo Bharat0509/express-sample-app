@@ -1,6 +1,6 @@
 // /////////////////////////////////////////////////////////////
 // REQUEST URL
-export const REQUEST_URL = 'https://bharatecommerce.onrender.com'
+export const REQUEST_URL = 'https://tiny-plum-coyote-vest.cyclic.app/';
 // export const REQUEST_URL = 'http://localhost:4000'
 
 // /////////////////////////////////////////////////////////////
