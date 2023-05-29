@@ -23,7 +23,7 @@ a {
 
 .productCard:hover {
     box-shadow: 0 0 5px rgba(15, 15, 15, .25);
-    transform: translateY(-1vmax);
+
 }
 
 .productCard:hover .product-img {
@@ -74,8 +74,8 @@ img {
 }
 
 .product-whichlist img {
-    width: 1.8rem;
-    height: 1.8rem;
+    width: 1.2rem;
+    height: 1.2rem;
 
     cursor: pointer;
 }
@@ -163,7 +163,7 @@ img {
     outline: none;
     border: none;
     padding: .5vmax 2vmax;
-    border-radius: 4vmax;
+    border-radius: .1rem;
     color: tomato;
     font-weight: 450;
     border: 1px solid tomato;

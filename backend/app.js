@@ -53,6 +53,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(fileUpload());
@@ -87,9 +88,9 @@ app.use('/api/v1', order);
 app.use('/api/v1', payment);
 
 app.use(express.static(path.join(__dirname, '../frontend/build')));
-// app.get('*', (req, res) => {
-//     res.sendFile(path.resolve(__dirname, '../frontend/build/index.html'));
-// });
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../frontend/build/index.html'));
+});
 
 // ********Error Handler Route*********** */
 app.use(ErrorHandlerMiddleware);
