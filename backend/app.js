@@ -45,7 +45,8 @@ const corsOptions = {
         'https://shopswift.onrender.com/',
         'https://shopswift.onrender.com',
         'https://tiny-plum-coyote-vest.cyclic.app/',
-        'https://tiny-plum-coyote-vest.cyclic.app'
+        'https://tiny-plum-coyote-vest.cyclic.app',
+        ``
     ],
     optionsSuccessStatus: 200,
     credentials: true
