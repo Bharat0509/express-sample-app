@@ -1,5 +1,7 @@
 import './footer.css'
+import { FaCcStripe, FaCcVisa, FaCcAmazonPay, FaCcPaypal, FaGooglePay } from 'react-icons/fa'
 
+import { SiAmericanexpress } from 'react-icons/si'
 const Footer = () => {
     return (
         <footer id='footer'>
@@ -14,12 +16,14 @@ const Footer = () => {
                     <div className="h-stack-2">
                         <span className="li-heading">Accepted Payments</span>
                         <div className="p-list-container">
-                            <span className="p-items">Stripe</span>
-                            <span className="p-items">Visa</span>
-                            <span className="p-items">Amazon</span>
-                            <span className="p-items">Stripe</span>
-                            <span className="p-items">Visa</span>
-                            <span className="p-items">Amazon</span>
+                            <span className="p-items"><FaCcStripe size={50} /></span>
+                            <span className="p-items"><FaCcVisa size={50} /></span>
+                            <span className="p-items"><FaCcAmazonPay size={50} /></span>
+                            <span className="p-items"><SiAmericanexpress size={50} /></span>
+                            <span className="p-items"><FaCcPaypal size={50} /></span>
+
+                            <span className="p-items"><FaGooglePay size={50} /></span>
+
                         </div>
                     </div>
 
